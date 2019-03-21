@@ -1,0 +1,75 @@
+package link.lycreate.bluefatty.dao;
+
+import link.lycreate.bluefatty.model.User;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+@Mapper
+public interface UserDao {
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/21 15:49
+     * @param record
+     * @return int
+     */
+    int insert(User record);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/21 15:49
+     * @param record
+     * @return int
+     */
+    int insertSelective(User record);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/21 15:49
+     * @param userId
+     * @return int
+     */
+    String getToken(int userId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/21 16:19
+     * @param userId
+     * @return int
+     */
+    String getUserName(int userId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/21 19:59
+     * @param openId
+     * @return int
+     */
+    int getUserIdByOpenId(String openId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/22 0:10
+     * @param userId
+    token
+     * @return int
+     */
+    int updateToken(@Param("userId") int userId, @Param("token") String token);
+   /**
+    * description
+    * @author LYcreate
+    * @date 2019/3/22 0:10
+    * @param openId
+   token
+    * @return int
+    */
+    int insertSimpleUser(@Param("openId") String openId,@Param("token") String token);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/22 0:17
+     * @param openId
+     * @return int
+     */
+    int countByOpenId(String openId);
+}

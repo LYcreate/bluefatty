@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="link.lycreate.bluefatty.dao.UserDao">
+  <resultMap id="BaseResultMap" type="link.lycreate.bluefatty.model.User">
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="stuName" jdbcType="VARCHAR" property="stuname" />
+    <result column="credit" jdbcType="INTEGER" property="credit" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+  </resultMap>
+  <insert id="insert" parameterType="link.lycreate.bluefatty.model.User">
+    insert into user (user_id, user_name, token, 
+      student_id, tel, gender, 
+      stuName, credit, open_id
+      )
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
+      #{studentId,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{stuname,jdbcType=VARCHAR}, #{credit,jdbcType=INTEGER}, #{openId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="link.lycreate.bluefatty.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="studentId != null">
+        student_id,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="stuname != null">
+        stuName,
+      </if>
+      <if test="credit != null">
+        credit,
+      </if>
+      <if test="openId != null">
+        open_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null">
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="stuname != null">
+        #{stuname,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null">
+        #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="getToken" parameterType="int" resultType="String">
+    select token from user where user_id=#{userId}
+  </select>
+  <select id="getUserName" parameterType="int" resultType="String">
+    select user_name from user where user_id=#{userId}
+  </select>
+  <select id="countByOpenId" resultType="int">
+    select count(*) from user where open_id=#{openId}
+  </select>
+  <select id="getUserIdByOpenId" resultType="int">
+    select user_id from user where open_id=#{openId}
+  </select>
+  <insert id="insertSimpleUser">
+    insert into user(open_id,token) values (#{openId},#{token})
+  </insert>
+  <update id="updateToken">
+    update user set token=#{token} where user_id=#{userId}
+  </update>
+</mapper>

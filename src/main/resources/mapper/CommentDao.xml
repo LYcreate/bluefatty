@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="link.lycreate.bluefatty.dao.CommentDao">
+  <resultMap id="BaseResultMap" type="link.lycreate.bluefatty.model.Comment">
+    <id column="comment_id" jdbcType="INTEGER" property="commentId" />
+    <result column="star" jdbcType="INTEGER" property="star" />
+    <result column="servant_id" jdbcType="INTEGER" property="servantId" />
+    <result column="dmder_id" jdbcType="INTEGER" property="dmderId" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="link.lycreate.bluefatty.model.Comment">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    comment_id, star, servant_id, dmder_id, order_id
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="comment_id" keyProperty="commentId" parameterType="link.lycreate.bluefatty.model.Comment" useGeneratedKeys="true">
+    insert into comment (star, servant_id, dmder_id, 
+      order_id, content)
+    values (#{star,jdbcType=INTEGER}, #{servantId,jdbcType=INTEGER}, #{dmderId,jdbcType=INTEGER}, 
+      #{orderId,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="comment_id" keyProperty="commentId" parameterType="link.lycreate.bluefatty.model.Comment" useGeneratedKeys="true">
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="star != null">
+        star,
+      </if>
+      <if test="servantId != null">
+        servant_id,
+      </if>
+      <if test="dmderId != null">
+        dmder_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="star != null">
+        #{star,jdbcType=INTEGER},
+      </if>
+      <if test="servantId != null">
+        #{servantId,jdbcType=INTEGER},
+      </if>
+      <if test="dmderId != null">
+        #{dmderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="link.lycreate.bluefatty.model.Comment">
+    update comment
+    <set>
+      <if test="star != null">
+        star = #{star,jdbcType=INTEGER},
+      </if>
+      <if test="servantId != null">
+        servant_id = #{servantId,jdbcType=INTEGER},
+      </if>
+      <if test="dmderId != null">
+        dmder_id = #{dmderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="link.lycreate.bluefatty.model.Comment">
+    update comment
+    set star = #{star,jdbcType=INTEGER},
+      servant_id = #{servantId,jdbcType=INTEGER},
+      dmder_id = #{dmderId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="link.lycreate.bluefatty.model.Comment">
+    update comment
+    set star = #{star,jdbcType=INTEGER},
+      servant_id = #{servantId,jdbcType=INTEGER},
+      dmder_id = #{dmderId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER}
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+</mapper>

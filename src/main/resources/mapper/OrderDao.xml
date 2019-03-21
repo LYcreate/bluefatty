@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="link.lycreate.bluefatty.dao.OrderDao">
+  <resultMap id="BaseResultMap" type="link.lycreate.bluefatty.model.Order">
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="servant_id" jdbcType="INTEGER" property="servantId" />
+    <result column="deadline" jdbcType="TIMESTAMP" property="deadline" />
+    <result column="place_id" jdbcType="INTEGER" property="placeId" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="dmder_id" jdbcType="INTEGER" property="dmderId" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="comment_id" jdbcType="INTEGER" property="commentId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="link.lycreate.bluefatty.model.Order">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, create_time, servant_id, deadline, place_id, tel, type_id, dmder_id, price, 
+    comment_id, `status`
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="order_id" keyProperty="orderId" parameterType="link.lycreate.bluefatty.model.Order" useGeneratedKeys="true">
+    insert into order (create_time, servant_id, deadline, 
+      place_id, tel, type_id, 
+      dmder_id, price, comment_id, 
+      `status`, content)
+    values (#{createTime,jdbcType=TIMESTAMP}, #{servantId,jdbcType=INTEGER}, #{deadline,jdbcType=TIMESTAMP}, 
+      #{placeId,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, 
+      #{dmderId,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{commentId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="order_id" keyProperty="orderId" parameterType="link.lycreate.bluefatty.model.Order" useGeneratedKeys="true">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="servantId != null">
+        servant_id,
+      </if>
+      <if test="deadline != null">
+        deadline,
+      </if>
+      <if test="placeId != null">
+        place_id,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="dmderId != null">
+        dmder_id,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="commentId != null">
+        comment_id,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="servantId != null">
+        #{servantId,jdbcType=INTEGER},
+      </if>
+      <if test="deadline != null">
+        #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="placeId != null">
+        #{placeId,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="dmderId != null">
+        #{dmderId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="commentId != null">
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="link.lycreate.bluefatty.model.Order">
+    update order
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="servantId != null">
+        servant_id = #{servantId,jdbcType=INTEGER},
+      </if>
+      <if test="deadline != null">
+        deadline = #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="placeId != null">
+        place_id = #{placeId,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="dmderId != null">
+        dmder_id = #{dmderId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="commentId != null">
+        comment_id = #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="link.lycreate.bluefatty.model.Order">
+    update order
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      servant_id = #{servantId,jdbcType=INTEGER},
+      deadline = #{deadline,jdbcType=TIMESTAMP},
+      place_id = #{placeId,jdbcType=INTEGER},
+      tel = #{tel,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      dmder_id = #{dmderId,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      comment_id = #{commentId,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="link.lycreate.bluefatty.model.Order">
+    update order
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      servant_id = #{servantId,jdbcType=INTEGER},
+      deadline = #{deadline,jdbcType=TIMESTAMP},
+      place_id = #{placeId,jdbcType=INTEGER},
+      tel = #{tel,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      dmder_id = #{dmderId,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      comment_id = #{commentId,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>
