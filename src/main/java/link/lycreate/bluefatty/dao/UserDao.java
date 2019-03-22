@@ -72,4 +72,12 @@ public interface UserDao {
      * @return int
      */
     int countByOpenId(String openId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/22 10:07
+     * @param token
+     * @return int
+     */
+    int countByToken(String token);
 }

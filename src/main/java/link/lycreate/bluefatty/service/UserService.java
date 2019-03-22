@@ -33,5 +33,13 @@ public interface UserService {
      * @return link.lycreate.bluefatty.utils.NetResult
      */
     public NetResult userLogin(String code);
-
+    /**
+     * description
+     * 验证是否存在该token
+     * @author LYcreate
+     * @date 2019/3/22 10:04
+     * @param token
+     * @return boolean
+     */
+    public boolean verifyToken(String token);
 }

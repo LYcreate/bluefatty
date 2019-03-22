@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.MessageDigest;
 import java.util.Base64;
 import java.util.Map;
@@ -77,5 +79,12 @@ public class UserServiceImpl implements UserService {
                 return netResult;
             }
         }
+    }
+
+    @Override
+    public boolean verifyToken(String token) {
+        int tokenCount=userDao.countByToken(token);
+        boolean verifyResult=tokenCount==1?true:false;
+        return verifyResult;
     }
 }

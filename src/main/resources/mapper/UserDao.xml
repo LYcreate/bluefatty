@@ -95,6 +95,9 @@
   <select id="getUserIdByOpenId" resultType="int">
     select user_id from user where open_id=#{openId}
   </select>
+    <select id="countByToken" resultType="int">
+        select count(*) from user where token=#{token}
+    </select>
   <insert id="insertSimpleUser">
     insert into user(open_id,token) values (#{openId},#{token})
   </insert>
