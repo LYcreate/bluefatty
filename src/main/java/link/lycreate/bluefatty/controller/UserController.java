@@ -2,15 +2,11 @@ package link.lycreate.bluefatty.controller;
 
 import link.lycreate.bluefatty.utils.NetResult;
 import link.lycreate.bluefatty.service.UserService;
-import org.apache.http.client.methods.HttpHead;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * @ClassName UserController
@@ -33,9 +29,5 @@ public class UserController {
             netResult=userService.userLogin(code);
         }
         return netResult;
-    }
-    @RequestMapping("/getToken")
-    public String getToken(int userId){
-        return userService.getToken(userId);
     }
 }

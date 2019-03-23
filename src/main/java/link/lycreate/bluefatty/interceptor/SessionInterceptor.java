@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,11 +19,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 public class SessionInterceptor implements HandlerInterceptor {
-    @Autowired
+    @Resource
     private UserService userService;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("进入拦截器");
+        String url=request.getRequestURI();
+        System.out.println(url);
         String token=request.getHeader("cookie");
         System.out.println("cookie:"+token);
         if (token==null){

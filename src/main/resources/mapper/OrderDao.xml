@@ -3,11 +3,13 @@
 <mapper namespace="link.lycreate.bluefatty.dao.OrderDao">
   <resultMap id="BaseResultMap" type="link.lycreate.bluefatty.model.Order">
     <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="servant_id" jdbcType="INTEGER" property="servantId" />
     <result column="deadline" jdbcType="TIMESTAMP" property="deadline" />
     <result column="place_id" jdbcType="INTEGER" property="placeId" />
-    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="content" property="content"/>
+    <result column="title" property="title" />
     <result column="type_id" jdbcType="INTEGER" property="typeId" />
     <result column="dmder_id" jdbcType="INTEGER" property="dmderId" />
     <result column="price" jdbcType="INTEGER" property="price" />
@@ -18,7 +20,7 @@
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
-    order_id, create_time, servant_id, deadline, place_id, tel, type_id, dmder_id, price, 
+    order_id, create_time, servant_id, deadline, place_id, type_id, dmder_id, price,
     comment_id, `status`
   </sql>
   <sql id="Blob_Column_List">
@@ -33,21 +35,21 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order
+    delete from orders
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="order_id" keyProperty="orderId" parameterType="link.lycreate.bluefatty.model.Order" useGeneratedKeys="true">
-    insert into order (create_time, servant_id, deadline, 
+    insert into orders (create_time, servant_id, deadline,
       place_id, tel, type_id, 
       dmder_id, price, comment_id, 
       `status`, content)
     values (#{createTime,jdbcType=TIMESTAMP}, #{servantId,jdbcType=INTEGER}, #{deadline,jdbcType=TIMESTAMP}, 
-      #{placeId,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, 
+      #{placeId,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER},
       #{dmderId,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{commentId,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="order_id" keyProperty="orderId" parameterType="link.lycreate.bluefatty.model.Order" useGeneratedKeys="true">
-    insert into order
+    insert into orders
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="createTime != null">
         create_time,
@@ -60,9 +62,6 @@
       </if>
       <if test="placeId != null">
         place_id,
-      </if>
-      <if test="tel != null">
-        tel,
       </if>
       <if test="typeId != null">
         type_id,
@@ -96,9 +95,6 @@
       <if test="placeId != null">
         #{placeId,jdbcType=INTEGER},
       </if>
-      <if test="tel != null">
-        #{tel,jdbcType=VARCHAR},
-      </if>
       <if test="typeId != null">
         #{typeId,jdbcType=INTEGER},
       </if>
@@ -120,7 +116,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="link.lycreate.bluefatty.model.Order">
-    update order
+    update orders
     <set>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -133,9 +129,6 @@
       </if>
       <if test="placeId != null">
         place_id = #{placeId,jdbcType=INTEGER},
-      </if>
-      <if test="tel != null">
-        tel = #{tel,jdbcType=VARCHAR},
       </if>
       <if test="typeId != null">
         type_id = #{typeId,jdbcType=INTEGER},
@@ -159,12 +152,11 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="link.lycreate.bluefatty.model.Order">
-    update order
+    update orders
     set create_time = #{createTime,jdbcType=TIMESTAMP},
       servant_id = #{servantId,jdbcType=INTEGER},
       deadline = #{deadline,jdbcType=TIMESTAMP},
       place_id = #{placeId,jdbcType=INTEGER},
-      tel = #{tel,jdbcType=VARCHAR},
       type_id = #{typeId,jdbcType=INTEGER},
       dmder_id = #{dmderId,jdbcType=INTEGER},
       price = #{price,jdbcType=INTEGER},
@@ -174,12 +166,11 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="link.lycreate.bluefatty.model.Order">
-    update order
+    update orders
     set create_time = #{createTime,jdbcType=TIMESTAMP},
       servant_id = #{servantId,jdbcType=INTEGER},
       deadline = #{deadline,jdbcType=TIMESTAMP},
       place_id = #{placeId,jdbcType=INTEGER},
-      tel = #{tel,jdbcType=VARCHAR},
       type_id = #{typeId,jdbcType=INTEGER},
       dmder_id = #{dmderId,jdbcType=INTEGER},
       price = #{price,jdbcType=INTEGER},
@@ -187,4 +178,42 @@
       `status` = #{status,jdbcType=INTEGER}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
+  <select id="selectDmdByPage" resultType="link.lycreate.bluefatty.utils.DemandResult">
+        select a.order_id as dmdId,a.create_time as createTime,a.deadline as deadLine,a.place_id as placeId,
+        a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.dmder_id as dmderId,b.user_name as dmderName,
+        b.credit as dmderStar,b.user_img as dmderImg
+        from orders a left join user b on a.dmder_id=b.user_id where a.status=1 limit #{pageNow},10
+    </select>
+  <select id="selectDmdByPlace" resultType="link.lycreate.bluefatty.utils.DemandResult">
+        select a.order_id as dmdId,a.create_time as createTime,a.deadline as deadLine,a.place_id as placeId,
+        a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.dmder_id as dmderId,b.user_name as dmderName,
+        b.credit as dmderStar,b.user_img as dmderImg
+        from orders a left join user b on a.dmder_id=b.user_id where a.status=1 and a.place_id in
+        <foreach collection="place" index="index" item="item" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+         limit #{pageNow},10
+  </select>
+  <select id="selectDmdByType" resultType="link.lycreate.bluefatty.utils.DemandResult">
+    select a.order_id as dmdId,a.create_time as createTime,a.deadline as deadLine,a.place_id as placeId,
+    a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.dmder_id as dmderId,b.user_name as dmderName,
+    b.credit as dmderStar,b.user_img as dmderImg
+    from orders a left join user b on a.dmder_id=b.user_id where a.status=1 and a.type_id in
+    <foreach collection="type" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    limit #{pageNow},10
+  </select>
+  <select id="selectDmdByDeadline" resultType="link.lycreate.bluefatty.utils.DemandResult">
+    select a.order_id as dmdId,a.create_time as createTime,a.deadline as deadLine,a.place_id as placeId,
+        a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.dmder_id as dmderId,b.user_name as dmderName,
+        b.credit as dmderStar,b.user_img as dmderImg
+        from orders a left join user b on a.dmder_id=b.user_id where a.status=1 and a.deadline between #{lowDeadline} and #{highDeadline} limit #{pageNow},10
+  </select>
+  <select id="selectDmdByPrice" resultType="link.lycreate.bluefatty.utils.DemandResult">
+    select a.order_id as dmdId,a.create_time as createTime,a.deadline as deadLine,a.place_id as placeId,
+        a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.dmder_id as dmderId,b.user_name as dmderName,
+        b.credit as dmderStar,b.user_img as dmderImg
+        from orders a left join user b on a.dmder_id=b.user_id where a.status=1 and a.price between #{lowPrice} and #{highPrice} limit #{pageNow},10
+  </select>
 </mapper>

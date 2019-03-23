@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
         int count=3;
         while(count!=0&&errcode==-1){
             resultMap=WxLogin.getUserInfo(code);
+            count--;
         }
         if(count==0){
             netResult=new NetResult(0,"系统繁忙，请稍后重试!");

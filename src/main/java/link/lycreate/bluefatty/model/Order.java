@@ -1,6 +1,8 @@
 package link.lycreate.bluefatty.model;
 
 import java.io.Serializable;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -10,15 +12,15 @@ import java.util.Date;
 public class Order implements Serializable {
     private Integer orderId;
 
-    private Date createTime;
+    private Integer userId;
+
+    private Timestamp createTime;
 
     private Integer servantId;
 
-    private Date deadline;
+    private Timestamp deadline;
 
     private Integer placeId;
-
-    private String tel;
 
     private Integer typeId;
 
@@ -42,11 +44,19 @@ public class Order implements Serializable {
         this.orderId = orderId;
     }
 
-    public Date getCreateTime() {
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Timestamp getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
 
@@ -58,11 +68,11 @@ public class Order implements Serializable {
         this.servantId = servantId;
     }
 
-    public Date getDeadline() {
+    public Timestamp getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(Timestamp deadline) {
         this.deadline = deadline;
     }
 
@@ -72,14 +82,6 @@ public class Order implements Serializable {
 
     public void setPlaceId(Integer placeId) {
         this.placeId = placeId;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
     }
 
     public Integer getTypeId() {
@@ -130,6 +132,21 @@ public class Order implements Serializable {
         this.content = content;
     }
 
+    public Order(Integer orderId, Integer userId,Timestamp createTime, Integer servantId, Timestamp deadline, Integer placeId, Integer typeId, Integer dmderId, Integer price, Integer commentId, Integer status, String content) {
+        this.orderId = orderId;
+        this.userId=userId;
+        this.createTime = createTime;
+        this.servantId = servantId;
+        this.deadline = deadline;
+        this.placeId = placeId;
+        this.typeId = typeId;
+        this.dmderId = dmderId;
+        this.price = price;
+        this.commentId = commentId;
+        this.status = status;
+        this.content = content;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -147,7 +164,6 @@ public class Order implements Serializable {
             && (this.getServantId() == null ? other.getServantId() == null : this.getServantId().equals(other.getServantId()))
             && (this.getDeadline() == null ? other.getDeadline() == null : this.getDeadline().equals(other.getDeadline()))
             && (this.getPlaceId() == null ? other.getPlaceId() == null : this.getPlaceId().equals(other.getPlaceId()))
-            && (this.getTel() == null ? other.getTel() == null : this.getTel().equals(other.getTel()))
             && (this.getTypeId() == null ? other.getTypeId() == null : this.getTypeId().equals(other.getTypeId()))
             && (this.getDmderId() == null ? other.getDmderId() == null : this.getDmderId().equals(other.getDmderId()))
             && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
@@ -165,7 +181,6 @@ public class Order implements Serializable {
         result = prime * result + ((getServantId() == null) ? 0 : getServantId().hashCode());
         result = prime * result + ((getDeadline() == null) ? 0 : getDeadline().hashCode());
         result = prime * result + ((getPlaceId() == null) ? 0 : getPlaceId().hashCode());
-        result = prime * result + ((getTel() == null) ? 0 : getTel().hashCode());
         result = prime * result + ((getTypeId() == null) ? 0 : getTypeId().hashCode());
         result = prime * result + ((getDmderId() == null) ? 0 : getDmderId().hashCode());
         result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
@@ -182,11 +197,11 @@ public class Order implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", orderId=").append(orderId);
+        sb.append(", userId=").append(userId);
         sb.append(", createTime=").append(createTime);
         sb.append(", servantId=").append(servantId);
         sb.append(", deadline=").append(deadline);
         sb.append(", placeId=").append(placeId);
-        sb.append(", tel=").append(tel);
         sb.append(", typeId=").append(typeId);
         sb.append(", dmderId=").append(dmderId);
         sb.append(", price=").append(price);

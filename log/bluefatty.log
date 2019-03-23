@@ -1,0 +1,156 @@
+2019-03-23 22:19:14.549  INFO 14092 --- [main] l.l.bluefatty.BluefattyApplication       : Starting BluefattyApplication on DESKTOP-FGTLSFF with PID 14092 (started by Asus in E:\ssmprojects\BlueFatty项目\bluefatty)
+2019-03-23 22:19:14.558  INFO 14092 --- [main] l.l.bluefatty.BluefattyApplication       : No active profile set, falling back to default profiles: default
+2019-03-23 22:19:15.346  INFO 14092 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-23 22:19:15.347  INFO 14092 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-23 22:19:15.364  INFO 14092 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11ms. Found 0 repository interfaces.
+2019-03-23 22:19:15.408  INFO 14092 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-23 22:19:15.410  INFO 14092 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-23 22:19:15.427  INFO 14092 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8ms. Found 0 repository interfaces.
+2019-03-23 22:19:15.818  INFO 14092 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$2439416b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-23 22:19:16.215  INFO 14092 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2019-03-23 22:19:16.240  INFO 14092 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-03-23 22:19:16.240  INFO 14092 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-23 22:19:16.247  INFO 14092 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.18] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.21]
+2019-03-23 22:19:16.248  INFO 14092 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.18] using APR version [1.6.5].
+2019-03-23 22:19:16.248  INFO 14092 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-03-23 22:19:16.249  INFO 14092 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-03-23 22:19:16.252  INFO 14092 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1  11 Sep 2018]
+2019-03-23 22:19:16.396  INFO 14092 --- [main] o.a.c.c.C.[.[localhost].[/bluefatty]     : Initializing Spring embedded WebApplicationContext
+2019-03-23 22:19:16.396  INFO 14092 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1799 ms
+2019-03-23 22:19:16.580  INFO 14092 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-03-23 22:19:16.712  INFO 14092 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-03-23 22:19:16.911  INFO 14092 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-03-23 22:19:16.986  INFO 14092 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+2019-03-23 22:19:16.987  INFO 14092 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-03-23 22:19:17.169  INFO 14092 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-03-23 22:19:17.322  INFO 14092 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-03-23 22:19:17.521  INFO 14092 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-03-23 22:19:18.096  INFO 14092 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-23 22:19:18.140  WARN 14092 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-03-23 22:19:18.709  INFO 14092 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path '/bluefatty'
+2019-03-23 22:19:18.712  INFO 14092 --- [main] l.l.bluefatty.BluefattyApplication       : Started BluefattyApplication in 4.724 seconds (JVM running for 6.739)
+2019-03-23 22:19:47.254  INFO 14092 --- [http-nio-8088-exec-1] o.a.c.c.C.[.[localhost].[/bluefatty]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-03-23 22:19:47.254  INFO 14092 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-03-23 22:19:47.264  INFO 14092 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-03-23 22:19:53.019 DEBUG 14092 --- [http-nio-8088-exec-2] l.l.b.dao.OrderDao.selectDmdByPrice      : ==>  Preparing: select a.order_id as dmdId,a.create_time as createTime,a.deadline as deadLine,a.place_id as placeId, a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.dmder_id as dmderId,b.user_name as dmderName, b.credit as dmderStar,b.user_img as dmderImg from orders a left join user b on a.dmder_id=b.user_id where a.status=1 and a.price between ? and ? limit ?,10 
+2019-03-23 22:19:53.284 DEBUG 14092 --- [http-nio-8088-exec-2] l.l.b.dao.OrderDao.selectDmdByPrice      : ==> Parameters: 10(Integer), 25(Integer), 10(Integer)
+2019-03-23 22:19:53.902 DEBUG 14092 --- [http-nio-8088-exec-2] l.l.b.dao.OrderDao.selectDmdByPrice      : <==      Total: 0
+2019-03-23 22:19:57.332 DEBUG 14092 --- [http-nio-8088-exec-1] l.l.bluefatty.dao.UserDao.countByOpenId  : ==>  Preparing: select count(*) from user where open_id=? 
+2019-03-23 22:19:57.332 DEBUG 14092 --- [http-nio-8088-exec-1] l.l.bluefatty.dao.UserDao.countByOpenId  : ==> Parameters: oKYoZ48veN9YlYsQhuccNPG4E2nk(String)
+2019-03-23 22:19:57.335 DEBUG 14092 --- [http-nio-8088-exec-1] l.l.bluefatty.dao.UserDao.countByOpenId  : <==      Total: 1
+2019-03-23 22:19:57.336 DEBUG 14092 --- [http-nio-8088-exec-1] l.l.b.dao.UserDao.getUserIdByOpenId      : ==>  Preparing: select user_id from user where open_id=? 
+2019-03-23 22:19:57.336 DEBUG 14092 --- [http-nio-8088-exec-1] l.l.b.dao.UserDao.getUserIdByOpenId      : ==> Parameters: oKYoZ48veN9YlYsQhuccNPG4E2nk(String)
+2019-03-23 22:19:57.337 DEBUG 14092 --- [http-nio-8088-exec-1] l.l.b.dao.UserDao.getUserIdByOpenId      : <==      Total: 1
+2019-03-23 22:19:57.337 DEBUG 14092 --- [http-nio-8088-exec-1] l.l.bluefatty.dao.UserDao.updateToken    : ==>  Preparing: update user set token=? where user_id=? 
+2019-03-23 22:19:57.337 DEBUG 14092 --- [http-nio-8088-exec-1] l.l.bluefatty.dao.UserDao.updateToken    : ==> Parameters: n92RSNedRV+i7DxzdZlAww==(String), 2(Integer)
+2019-03-23 22:19:57.383 DEBUG 14092 --- [http-nio-8088-exec-1] l.l.bluefatty.dao.UserDao.updateToken    : <==    Updates: 1
+2019-03-23 22:22:40.328  INFO 19956 --- [main] l.l.bluefatty.BluefattyApplication       : Starting BluefattyApplication on DESKTOP-FGTLSFF with PID 19956 (started by Asus in E:\ssmprojects\BlueFatty项目\bluefatty)
+2019-03-23 22:22:40.331  INFO 19956 --- [main] l.l.bluefatty.BluefattyApplication       : No active profile set, falling back to default profiles: default
+2019-03-23 22:22:41.168  INFO 19956 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-23 22:22:41.168  INFO 19956 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-23 22:22:41.187  INFO 19956 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11ms. Found 0 repository interfaces.
+2019-03-23 22:22:41.199  INFO 19956 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-23 22:22:41.201  INFO 19956 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-23 22:22:41.214  INFO 19956 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5ms. Found 0 repository interfaces.
+2019-03-23 22:22:41.620  INFO 19956 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ee940d7a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-23 22:22:41.992  INFO 19956 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2019-03-23 22:22:42.016  INFO 19956 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-03-23 22:22:42.016  INFO 19956 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-23 22:22:42.023  INFO 19956 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.18] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.21]
+2019-03-23 22:22:42.023  INFO 19956 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.18] using APR version [1.6.5].
+2019-03-23 22:22:42.023  INFO 19956 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-03-23 22:22:42.023  INFO 19956 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-03-23 22:22:42.027  INFO 19956 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1  11 Sep 2018]
+2019-03-23 22:22:42.221  INFO 19956 --- [main] o.a.c.c.C.[.[localhost].[/bluefatty]     : Initializing Spring embedded WebApplicationContext
+2019-03-23 22:22:42.221  INFO 19956 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1848 ms
+2019-03-23 22:22:42.381  INFO 19956 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-03-23 22:22:42.497  INFO 19956 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-03-23 22:22:42.661  INFO 19956 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-03-23 22:22:42.739  INFO 19956 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+2019-03-23 22:22:42.740  INFO 19956 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-03-23 22:22:42.876  INFO 19956 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-03-23 22:22:43.008  INFO 19956 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-03-23 22:22:43.166  INFO 19956 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-03-23 22:22:43.651  INFO 19956 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-23 22:22:43.690  WARN 19956 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-03-23 22:22:44.194  INFO 19956 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path '/bluefatty'
+2019-03-23 22:22:44.198  INFO 19956 --- [main] l.l.bluefatty.BluefattyApplication       : Started BluefattyApplication in 4.373 seconds (JVM running for 5.426)
+2019-03-23 22:22:53.296  INFO 19956 --- [http-nio-8088-exec-1] o.a.c.c.C.[.[localhost].[/bluefatty]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-03-23 22:22:53.296  INFO 19956 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-03-23 22:22:53.307  INFO 19956 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2019-03-23 22:22:53.493 DEBUG 19956 --- [http-nio-8088-exec-1] l.l.b.dao.OrderDao.selectDmdByPrice      : ==>  Preparing: select a.order_id as dmdId,a.create_time as createTime,a.deadline as deadLine,a.place_id as placeId, a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.dmder_id as dmderId,b.user_name as dmderName, b.credit as dmderStar,b.user_img as dmderImg from orders a left join user b on a.dmder_id=b.user_id where a.status=1 and a.price between ? and ? limit ?,10 
+2019-03-23 22:22:53.523 DEBUG 19956 --- [http-nio-8088-exec-1] l.l.b.dao.OrderDao.selectDmdByPrice      : ==> Parameters: 10(Integer), 25(Integer), 10(Integer)
+2019-03-23 22:22:53.585 DEBUG 19956 --- [http-nio-8088-exec-1] l.l.b.dao.OrderDao.selectDmdByPrice      : <==      Total: 0
+2019-03-23 22:22:54.278 DEBUG 19956 --- [http-nio-8088-exec-2] l.l.bluefatty.dao.UserDao.countByOpenId  : ==>  Preparing: select count(*) from user where open_id=? 
+2019-03-23 22:22:54.280 DEBUG 19956 --- [http-nio-8088-exec-2] l.l.bluefatty.dao.UserDao.countByOpenId  : ==> Parameters: oKYoZ48veN9YlYsQhuccNPG4E2nk(String)
+2019-03-23 22:22:54.285 DEBUG 19956 --- [http-nio-8088-exec-2] l.l.bluefatty.dao.UserDao.countByOpenId  : <==      Total: 1
+2019-03-23 22:22:54.285 DEBUG 19956 --- [http-nio-8088-exec-2] l.l.b.dao.UserDao.getUserIdByOpenId      : ==>  Preparing: select user_id from user where open_id=? 
+2019-03-23 22:22:54.286 DEBUG 19956 --- [http-nio-8088-exec-2] l.l.b.dao.UserDao.getUserIdByOpenId      : ==> Parameters: oKYoZ48veN9YlYsQhuccNPG4E2nk(String)
+2019-03-23 22:22:54.286 DEBUG 19956 --- [http-nio-8088-exec-2] l.l.b.dao.UserDao.getUserIdByOpenId      : <==      Total: 1
+2019-03-23 22:22:54.287 DEBUG 19956 --- [http-nio-8088-exec-2] l.l.bluefatty.dao.UserDao.updateToken    : ==>  Preparing: update user set token=? where user_id=? 
+2019-03-23 22:22:54.287 DEBUG 19956 --- [http-nio-8088-exec-2] l.l.bluefatty.dao.UserDao.updateToken    : ==> Parameters: xoXZtDZtoQTXy5XMVMUhkw==(String), 2(Integer)
+2019-03-23 22:22:54.379 DEBUG 19956 --- [http-nio-8088-exec-2] l.l.bluefatty.dao.UserDao.updateToken    : <==    Updates: 1
+2019-03-23 22:23:58.069 DEBUG 19956 --- [http-nio-8088-exec-6] l.l.b.dao.OrderDao.selectDmdByPrice      : ==>  Preparing: select a.order_id as dmdId,a.create_time as createTime,a.deadline as deadLine,a.place_id as placeId, a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.dmder_id as dmderId,b.user_name as dmderName, b.credit as dmderStar,b.user_img as dmderImg from orders a left join user b on a.dmder_id=b.user_id where a.status=1 and a.price between ? and ? limit ?,10 
+2019-03-23 22:23:58.070 DEBUG 19956 --- [http-nio-8088-exec-6] l.l.b.dao.OrderDao.selectDmdByPrice      : ==> Parameters: 9(Integer), 25(Integer), 9(Integer)
+2019-03-23 22:23:58.071 DEBUG 19956 --- [http-nio-8088-exec-6] l.l.b.dao.OrderDao.selectDmdByPrice      : <==      Total: 0
+2019-03-23 22:23:58.125 DEBUG 19956 --- [http-nio-8088-exec-5] l.l.bluefatty.dao.UserDao.countByOpenId  : ==>  Preparing: select count(*) from user where open_id=? 
+2019-03-23 22:23:58.126 DEBUG 19956 --- [http-nio-8088-exec-5] l.l.bluefatty.dao.UserDao.countByOpenId  : ==> Parameters: oKYoZ48veN9YlYsQhuccNPG4E2nk(String)
+2019-03-23 22:23:58.127 DEBUG 19956 --- [http-nio-8088-exec-5] l.l.bluefatty.dao.UserDao.countByOpenId  : <==      Total: 1
+2019-03-23 22:23:58.127 DEBUG 19956 --- [http-nio-8088-exec-5] l.l.b.dao.UserDao.getUserIdByOpenId      : ==>  Preparing: select user_id from user where open_id=? 
+2019-03-23 22:23:58.127 DEBUG 19956 --- [http-nio-8088-exec-5] l.l.b.dao.UserDao.getUserIdByOpenId      : ==> Parameters: oKYoZ48veN9YlYsQhuccNPG4E2nk(String)
+2019-03-23 22:23:58.128 DEBUG 19956 --- [http-nio-8088-exec-5] l.l.b.dao.UserDao.getUserIdByOpenId      : <==      Total: 1
+2019-03-23 22:23:58.128 DEBUG 19956 --- [http-nio-8088-exec-5] l.l.bluefatty.dao.UserDao.updateToken    : ==>  Preparing: update user set token=? where user_id=? 
+2019-03-23 22:23:58.129 DEBUG 19956 --- [http-nio-8088-exec-5] l.l.bluefatty.dao.UserDao.updateToken    : ==> Parameters: xoXZtDZtoQTXy5XMVMUhkw==(String), 2(Integer)
+2019-03-23 22:23:58.129 DEBUG 19956 --- [http-nio-8088-exec-5] l.l.bluefatty.dao.UserDao.updateToken    : <==    Updates: 1
+2019-03-23 22:24:46.868  INFO 10800 --- [main] l.l.bluefatty.BluefattyApplication       : Starting BluefattyApplication on DESKTOP-FGTLSFF with PID 10800 (started by Asus in E:\ssmprojects\BlueFatty项目\bluefatty)
+2019-03-23 22:24:46.872  INFO 10800 --- [main] l.l.bluefatty.BluefattyApplication       : No active profile set, falling back to default profiles: default
+2019-03-23 22:24:48.013  INFO 10800 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-23 22:24:48.014  INFO 10800 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-23 22:24:48.034  INFO 10800 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12ms. Found 0 repository interfaces.
+2019-03-23 22:24:48.047  INFO 10800 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-03-23 22:24:48.048  INFO 10800 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-23 22:24:48.060  INFO 10800 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4ms. Found 0 repository interfaces.
+2019-03-23 22:24:48.406  INFO 10800 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$358067b2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-23 22:24:48.749  INFO 10800 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2019-03-23 22:24:48.792  INFO 10800 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-03-23 22:24:48.792  INFO 10800 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-23 22:24:48.802  INFO 10800 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.18] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.21]
+2019-03-23 22:24:48.802  INFO 10800 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.18] using APR version [1.6.5].
+2019-03-23 22:24:48.803  INFO 10800 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-03-23 22:24:48.803  INFO 10800 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-03-23 22:24:48.807  INFO 10800 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1  11 Sep 2018]
+2019-03-23 22:24:49.084  INFO 10800 --- [main] o.a.c.c.C.[.[localhost].[/bluefatty]     : Initializing Spring embedded WebApplicationContext
+2019-03-23 22:24:49.085  INFO 10800 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2135 ms
+2019-03-23 22:24:49.239  INFO 10800 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-03-23 22:24:49.359  INFO 10800 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-03-23 22:24:49.505  INFO 10800 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-03-23 22:24:49.569  INFO 10800 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+2019-03-23 22:24:49.571  INFO 10800 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-03-23 22:24:49.697  INFO 10800 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-03-23 22:24:49.841  INFO 10800 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-03-23 22:24:50.022  INFO 10800 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-03-23 22:24:50.527  INFO 10800 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-23 22:24:50.570  WARN 10800 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-03-23 22:24:51.080  INFO 10800 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path '/bluefatty'
+2019-03-23 22:24:51.082  INFO 10800 --- [main] l.l.bluefatty.BluefattyApplication       : Started BluefattyApplication in 4.663 seconds (JVM running for 5.821)
+2019-03-23 22:24:58.664  INFO 10800 --- [http-nio-8088-exec-1] o.a.c.c.C.[.[localhost].[/bluefatty]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-03-23 22:24:58.664  INFO 10800 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-03-23 22:24:58.675  INFO 10800 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2019-03-23 22:24:58.849 DEBUG 10800 --- [http-nio-8088-exec-2] l.l.b.dao.OrderDao.selectDmdByPrice      : ==>  Preparing: select a.order_id as dmdId,a.create_time as createTime,a.deadline as deadLine,a.place_id as placeId, a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.dmder_id as dmderId,b.user_name as dmderName, b.credit as dmderStar,b.user_img as dmderImg from orders a left join user b on a.dmder_id=b.user_id where a.status=1 and a.price between ? and ? limit ?,10 
+2019-03-23 22:24:58.880 DEBUG 10800 --- [http-nio-8088-exec-2] l.l.b.dao.OrderDao.selectDmdByPrice      : ==> Parameters: 9(Integer), 25(Integer), 0(Integer)
+2019-03-23 22:24:58.991 DEBUG 10800 --- [http-nio-8088-exec-2] l.l.b.dao.OrderDao.selectDmdByPrice      : <==      Total: 2
+2019-03-23 22:25:00.721 DEBUG 10800 --- [http-nio-8088-exec-1] l.l.bluefatty.dao.UserDao.countByOpenId  : ==>  Preparing: select count(*) from user where open_id=? 
+2019-03-23 22:25:00.721 DEBUG 10800 --- [http-nio-8088-exec-1] l.l.bluefatty.dao.UserDao.countByOpenId  : ==> Parameters: oKYoZ48veN9YlYsQhuccNPG4E2nk(String)
+2019-03-23 22:25:00.723 DEBUG 10800 --- [http-nio-8088-exec-1] l.l.bluefatty.dao.UserDao.countByOpenId  : <==      Total: 1
+2019-03-23 22:25:00.725 DEBUG 10800 --- [http-nio-8088-exec-1] l.l.b.dao.UserDao.getUserIdByOpenId      : ==>  Preparing: select user_id from user where open_id=? 
+2019-03-23 22:25:00.725 DEBUG 10800 --- [http-nio-8088-exec-1] l.l.b.dao.UserDao.getUserIdByOpenId      : ==> Parameters: oKYoZ48veN9YlYsQhuccNPG4E2nk(String)
+2019-03-23 22:25:00.726 DEBUG 10800 --- [http-nio-8088-exec-1] l.l.b.dao.UserDao.getUserIdByOpenId      : <==      Total: 1
+2019-03-23 22:25:00.726 DEBUG 10800 --- [http-nio-8088-exec-1] l.l.bluefatty.dao.UserDao.updateToken    : ==>  Preparing: update user set token=? where user_id=? 
+2019-03-23 22:25:00.726 DEBUG 10800 --- [http-nio-8088-exec-1] l.l.bluefatty.dao.UserDao.updateToken    : ==> Parameters: y/ZOHDU4ZFRlvo6eMeaGzA==(String), 2(Integer)
+2019-03-23 22:25:00.790 DEBUG 10800 --- [http-nio-8088-exec-1] l.l.bluefatty.dao.UserDao.updateToken    : <==    Updates: 1

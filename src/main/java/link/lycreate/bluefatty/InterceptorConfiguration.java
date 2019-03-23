@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @ClassName InterceptorConfig
- * @Description TODO
+ * @Description 拦截器配置
  * @Author LYcreate
  * @Date 2019/3/22 10:59
  */

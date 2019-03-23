@@ -25,6 +25,8 @@ public class User implements Serializable {
 
     private String openId;
 
+    private String userImg;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getUserId() {
@@ -99,62 +101,65 @@ public class User implements Serializable {
         this.openId = openId;
     }
 
+    public String getUserImg() {
+        return userImg;
+    }
+
+    public void setUserImg(String userImg) {
+        this.userImg = userImg;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        User other = (User) that;
-        return (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
-            && (this.getToken() == null ? other.getToken() == null : this.getToken().equals(other.getToken()))
-            && (this.getStudentId() == null ? other.getStudentId() == null : this.getStudentId().equals(other.getStudentId()))
-            && (this.getTel() == null ? other.getTel() == null : this.getTel().equals(other.getTel()))
-            && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
-            && (this.getStuname() == null ? other.getStuname() == null : this.getStuname().equals(other.getStuname()))
-            && (this.getCredit() == null ? other.getCredit() == null : this.getCredit().equals(other.getCredit()))
-            && (this.getOpenId() == null ? other.getOpenId() == null : this.getOpenId().equals(other.getOpenId()));
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+
+        User user = (User) o;
+
+        if (userId != null ? !userId.equals(user.userId) : user.userId != null) return false;
+        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
+        if (token != null ? !token.equals(user.token) : user.token != null) return false;
+        if (studentId != null ? !studentId.equals(user.studentId) : user.studentId != null) return false;
+        if (tel != null ? !tel.equals(user.tel) : user.tel != null) return false;
+        if (gender != null ? !gender.equals(user.gender) : user.gender != null) return false;
+        if (stuname != null ? !stuname.equals(user.stuname) : user.stuname != null) return false;
+        if (credit != null ? !credit.equals(user.credit) : user.credit != null) return false;
+        if (openId != null ? !openId.equals(user.openId) : user.openId != null) return false;
+        return userImg != null ? userImg.equals(user.userImg) : user.userImg == null;
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
-        result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
-        result = prime * result + ((getToken() == null) ? 0 : getToken().hashCode());
-        result = prime * result + ((getStudentId() == null) ? 0 : getStudentId().hashCode());
-        result = prime * result + ((getTel() == null) ? 0 : getTel().hashCode());
-        result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());
-        result = prime * result + ((getStuname() == null) ? 0 : getStuname().hashCode());
-        result = prime * result + ((getCredit() == null) ? 0 : getCredit().hashCode());
-        result = prime * result + ((getOpenId() == null) ? 0 : getOpenId().hashCode());
+        int result = userId != null ? userId.hashCode() : 0;
+        result = 31 * result + (userName != null ? userName.hashCode() : 0);
+        result = 31 * result + (token != null ? token.hashCode() : 0);
+        result = 31 * result + (studentId != null ? studentId.hashCode() : 0);
+        result = 31 * result + (tel != null ? tel.hashCode() : 0);
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + (stuname != null ? stuname.hashCode() : 0);
+        result = 31 * result + (credit != null ? credit.hashCode() : 0);
+        result = 31 * result + (openId != null ? openId.hashCode() : 0);
+        result = 31 * result + (userImg != null ? userImg.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", userId=").append(userId);
-        sb.append(", userName=").append(userName);
-        sb.append(", token=").append(token);
-        sb.append(", studentId=").append(studentId);
-        sb.append(", tel=").append(tel);
-        sb.append(", gender=").append(gender);
-        sb.append(", stuname=").append(stuname);
-        sb.append(", credit=").append(credit);
-        sb.append(", openId=").append(openId);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", token='" + token + '\'' +
+                ", studentId=" + studentId +
+                ", tel='" + tel + '\'' +
+                ", gender='" + gender + '\'' +
+                ", stuname='" + stuname + '\'' +
+                ", credit=" + credit +
+                ", openId='" + openId + '\'' +
+                ", userImg='" + userImg + '\'' +
+                '}';
     }
 }

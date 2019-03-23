@@ -11,6 +11,7 @@
     <result column="stuName" jdbcType="VARCHAR" property="stuname" />
     <result column="credit" jdbcType="INTEGER" property="credit" />
     <result column="open_id" jdbcType="VARCHAR" property="openId" />
+      <result column="user_img" property="openId" />
   </resultMap>
   <insert id="insert" parameterType="link.lycreate.bluefatty.model.User">
     insert into user (user_id, user_name, token, 
