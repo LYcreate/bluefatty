@@ -36,6 +36,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
         excludeUrlList.add("/getServiceByType");
         excludeUrlList.add("/getServiceByTime");
         excludeUrlList.add("/getServiceByServiceId");
+        excludeUrlList.add("/getUniversityInfo");
     }
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

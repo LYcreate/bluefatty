@@ -216,4 +216,65 @@
         b.credit as dmderStar,b.user_img as dmderImg
         from orders a left join user b on a.dmder_id=b.user_id where a.status=1 and a.price between #{lowPrice} and #{highPrice} limit #{pageNow},10
   </select>
+  <select id="selectDmdByKeyword" resultType="link.lycreate.bluefatty.utils.DemandResult">
+    <bind name="pattern" value="'%'+keyword+'%'"></bind>
+    select a.order_id as dmdId,a.create_time as createTime,a.deadline as deadline,a.place_id as placeId,
+    a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.dmder_id as dmderId,b.user_name as dmderName,
+    b.credit as dmderStar,b.user_img as dmderImg
+    from orders a left join user b on a.dmder_id=b.user_id where a.status=1
+    and (a.title like #{pattern} or a.content like #{pattern}) limit #{pageNow},10
+  </select>
+  <select id="selectDmdByDmdId" resultType="String">
+    select content from orders where order_id=#{dmdId}
+  </select>
+  <select id="selectServiceByPage" resultType="link.lycreate.bluefatty.utils.ServiceResult">
+    select a.order_id as serviceId,a.create_time as lowDeadline,a.deadline as highDeadLine,a.place_id as placeId,
+        a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.servant_id as servantId,b.user_name as servantName,
+        b.credit as servantStar,b.user_img as servantImg
+        from orders a left join user b on a.service_id=b.user_id where a.status=0 limit #{pageNow},10
+  </select>
+  <select id="selectServiceByDeadline" resultType="link.lycreate.bluefatty.utils.ServiceResult">
+    select a.order_id as serviceId,a.create_time as lowDeadline,a.deadline as highDeadline,a.place_id as placeId,
+        a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.servant_id as servantId,b.user_name as servantName,
+        b.credit as servantStar,b.user_img as servantImg
+        from orders a left join user b on a.servant_id=b.user_id where a.status=0 and #{highDeadline}>=a.deadline and a.create_time>=#{lowDeadline}
+        limit #{pageNow},10
+  </select>
+  <select id="selectServiceByPlace" resultType="link.lycreate.bluefatty.utils.ServiceResult">
+    select a.order_id as serviceId,a.create_time as lowDeadline,a.deadline as highDeadline,a.place_id as placeId,
+    a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.servant_id as servantId,b.user_name as servantName,
+    b.credit as servantStar,b.user_img as servantImg
+    from orders a left join user b on a.servant_id=b.user_id where a.status=0 and a.place_id in
+    <foreach collection="place" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    limit #{pageNow},10
+  </select>
+  <select id="selectServiceByPrice" resultType="link.lycreate.bluefatty.utils.ServiceResult">
+    select a.order_id as serviceId,a.create_time as lowDeadline,a.deadline as highDeadline,a.place_id as placeId,
+        a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.servant_id as servantId,b.user_name as servantName,
+        b.credit as servantStar,b.user_img as servantImg
+        from orders a left join user b on a.servant_id=b.user_id where a.status=0 and a.price between #{lowPrice} and #{highPrice} limit #{pageNow},10
+  </select>
+  <select id="selectServiceByType" resultType="link.lycreate.bluefatty.utils.ServiceResult">
+    select a.order_id as serviceId,a.create_time as lowDeadline,a.deadline as highDeadLine,a.place_id as placeId,
+    a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.servant_id as servantId,b.user_name as servantName,
+    b.credit as servantStar,b.user_img as servantImg
+    from orders a left join user b on a.servant_id=b.user_id where a.status=0 and a.type_id in
+    <foreach collection="type" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    limit #{pageNow},10
+  </select>
+  <select id="selectServiceByKeyword" resultType="link.lycreate.bluefatty.utils.ServiceResult">
+    <bind name="pattern" value="'%'+keyword+'%'"></bind>
+    select a.order_id as serviceId,a.create_time as lowDeadline,a.deadline as highDeadline,a.place_id as placeId,
+        a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.servant_id as servantId,b.user_name as servantName,
+        b.credit as servantStar,b.user_img as servantImg
+        from orders a left join user b on a.servant_id=b.user_id where a.status=0
+        and (a.title like #{pattern} or a.content like #{pattern}) limit #{pageNow},10
+  </select>
+  <select id="selectServiceByServiceId" resultType="String">
+    select content from orders where order_id=#{serviceId}
+  </select>
 </mapper>

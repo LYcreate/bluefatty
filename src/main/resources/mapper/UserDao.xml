@@ -105,4 +105,7 @@
   <update id="updateToken">
     update user set token=#{token} where user_id=#{userId}
   </update>
+  <update id="updateNewUser">
+    update user set user_name=#{userName},stuName=#{stuName},student_id=#{stuId},university_id=#{universityId} where token=#{token}
+  </update>
 </mapper>

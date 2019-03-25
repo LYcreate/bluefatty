@@ -1,6 +1,7 @@
 package link.lycreate.bluefatty.service;
 
 import link.lycreate.bluefatty.utils.NetResult;
+import sun.nio.ch.Net;
 
 /**
  * UserService
@@ -42,4 +43,16 @@ public interface UserService {
      * @return boolean
      */
     public boolean verifyToken(String token);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/25 22:53
+     * @param userName
+    stuName
+    stuId
+    universityId
+    token
+     * @return link.lycreate.bluefatty.utils.NetResult
+     */
+    public NetResult signUp(String userName,String stuName,String stuId,int universityId,String token);
 }

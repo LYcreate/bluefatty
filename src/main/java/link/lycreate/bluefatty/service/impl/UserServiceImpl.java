@@ -66,6 +66,7 @@ public class UserServiceImpl implements UserService {
                 MessageDigest md5 = MessageDigest.getInstance("MD5");
                 String token=Base64.getEncoder().encodeToString(md5.digest(infoStr.getBytes("utf-8")));
                 int userCount=userDao.countByOpenId(openId);
+                System.out.println("userCount"+userCount);
                 if (userCount==1){
                     Integer userId=userDao.getUserIdByOpenId(openId);
                     userDao.updateToken(userId,token);
@@ -87,5 +88,17 @@ public class UserServiceImpl implements UserService {
         int tokenCount=userDao.countByToken(token);
         boolean verifyResult=tokenCount==1?true:false;
         return verifyResult;
+    }
+
+    @Override
+    public NetResult signUp(String userName, String stuName, String stuId, int universityId, String token) {
+        int result=userDao.updateNewUser(userName,stuName,stuId,universityId,token);
+        if (result==1){
+            NetResult netResult=new NetResult(1,"已提交认证信息！");
+            return netResult;
+        }else {
+            NetResult netResult=new NetResult(0,"提交认证信息失败！");
+            return netResult;
+        }
     }
 }

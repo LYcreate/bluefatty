@@ -80,4 +80,16 @@ public interface UserDao {
      * @return int
      */
     int countByToken(String token);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/25 23:40
+     * @param userName
+    stuName
+    stuId
+    universityId
+    token
+     * @return int
+     */
+    int updateNewUser(@Param("userName")String userName,@Param("stuName")String stuName,@Param("stuId")String stuId,@Param("universityId")int universityId,@Param("token")String token);
 }

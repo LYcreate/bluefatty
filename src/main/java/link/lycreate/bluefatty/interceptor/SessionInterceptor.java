@@ -26,8 +26,8 @@ public class SessionInterceptor implements HandlerInterceptor {
         System.out.println("进入拦截器");
         String url=request.getRequestURI();
         System.out.println(url);
-        String token=request.getHeader("cookie");
-        System.out.println("cookie:"+token);
+        String token=request.getHeader("token");
+        System.out.println("token:"+token);
         if (token==null){
             return false;
         }else {

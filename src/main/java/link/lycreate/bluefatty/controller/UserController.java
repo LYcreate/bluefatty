@@ -4,6 +4,7 @@ import link.lycreate.bluefatty.utils.NetResult;
 import link.lycreate.bluefatty.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
@@ -30,4 +31,22 @@ public class UserController {
         }
         return netResult;
     }
+
+    @RequestMapping(value = "/signUp",method = {RequestMethod.POST})
+    public @ResponseBody NetResult signUp(HttpServletRequest request){
+        String userName=request.getParameter("userName");
+        String stuName=request.getParameter("stuName");
+        String strUniversityId=request.getParameter("universityId");
+        int universityId=Integer.parseInt(strUniversityId);
+        String stuId=request.getParameter("stuId");
+        String token=request.getHeader("token");
+        if (token==null){
+            NetResult netResult=new NetResult(0,"用户未登录！");
+            return netResult;
+        }else {
+            NetResult netResult=userService.signUp(userName,stuName,stuId,universityId,token);
+            return netResult;
+        }
+    }
+
 }
