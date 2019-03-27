@@ -14,7 +14,6 @@ public class DemandResult {
     private Timestamp deadline;
     private Integer placeId;
     private Integer typeId;
-    private String title;
     private String content;
     private Integer price;
     private Integer dmderId;
@@ -22,31 +21,18 @@ public class DemandResult {
     private Integer dmderStar;
     private String dmderImg;
 
-    public DemandResult(Integer dmdId,Timestamp createTime, Timestamp deadline,Integer placeId, Integer typeId, String title, String content, Integer price, Integer dmderId, String dmderName, Integer dmderStar, String dmderImg) {
+    public DemandResult(Integer dmdId,Timestamp createTime, Timestamp deadline,Integer placeId, Integer typeId,String content, Integer price, Integer dmderId, String dmderName, Integer dmderStar, String dmderImg) {
         this.dmdId = dmdId;
         this.createTime = createTime;
         this.deadline=deadline;
         this.placeId = placeId;
         this.typeId = typeId;
-        this.title=title;
         this.content = content;
         this.price = price;
         this.dmderId = dmderId;
         this.dmderName = dmderName;
         this.dmderStar = dmderStar;
         this.dmderImg = dmderImg;
-    }
-
-    public DemandResult(Integer dmdId, Timestamp createTime, Timestamp deadline,Integer placeId, Integer typeId, String title, String content, Integer price, Integer dmderId) {
-        this.dmdId = dmdId;
-        this.createTime = createTime;
-        this.deadline=deadline;
-        this.placeId = placeId;
-        this.typeId = typeId;
-        this.title = title;
-        this.content = content;
-        this.price = price;
-        this.dmderId = dmderId;
     }
 
     public Integer getDmdId() {
@@ -87,14 +73,6 @@ public class DemandResult {
 
     public void setTypeId(int typeId) {
         this.typeId = typeId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getContent() {
@@ -153,7 +131,6 @@ public class DemandResult {
                 ", deadline=" + deadline +
                 ", placeId=" + placeId +
                 ", typeId=" + typeId +
-                ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", price=" + price +
                 ", dmderId=" + dmderId +

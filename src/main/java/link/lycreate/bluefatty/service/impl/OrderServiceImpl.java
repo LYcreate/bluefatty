@@ -5,6 +5,7 @@ import link.lycreate.bluefatty.service.OrderService;
 import link.lycreate.bluefatty.utils.DemandResult;
 import link.lycreate.bluefatty.utils.NetResult;
 import link.lycreate.bluefatty.utils.ServiceResult;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sun.nio.ch.Net;
@@ -26,8 +27,11 @@ public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao;
 
     @Override
-    public List<DemandResult> getAllDemands(int pageNow) {
-        List<DemandResult> orderList=orderDao.selectDmdByPage(pageNow);
+    public List<DemandResult> getAllDemands(int pageNow, int universityId, List<Integer> place, Timestamp lowDeadline,
+                                            Timestamp highDeadline, int lowPrice, int highPrice, List<Integer> type) {
+        List<DemandResult> orderList=orderDao.selectDmdByPage(pageNow,universityId,place,lowDeadline,highDeadline,
+                lowPrice,highPrice,type);
+        System.out.println("返回成功");
         return orderList;
     }
 
@@ -70,8 +74,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<ServiceResult> getAllServices(int pageNow) {
-        List<ServiceResult> orderList=orderDao.selectServiceByPage(pageNow);
+    public List<ServiceResult> getAllServices(int pageNow, int universityId, List<Integer> place,Timestamp lowDeadline,
+                                              Timestamp highDeadline, int lowPrice, int highPrice,List<Integer> type) {
+        List<ServiceResult> orderList = orderDao.selectServiceByPage(pageNow, universityId, place, lowDeadline, highDeadline,
+                lowPrice, highPrice, type);
         return orderList;
     }
 
@@ -113,12 +119,25 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public NetResult applyService(String token, int serviceId) {
+        //微信服务消息的转发
         int result=orderDao.updateByServiceId(token,serviceId,2);
         if (result==1){
             NetResult netResult=new NetResult(1,"已提交申请!");
             return netResult;
         }else {
             NetResult netResult=new NetResult(0,"提交失败！");
+            return netResult;
+        }
+    }
+
+    @Override
+    public NetResult addService(int servantId, int typeId, int placeId, int price, Timestamp lowDeadline, Timestamp highDeadline) {
+        int result=orderDao.insertService(servantId,typeId,placeId,price,lowDeadline,highDeadline);
+        if (result==1){
+            NetResult netResult=new NetResult(1,"发布成功！");
+            return netResult;
+        }else {
+            NetResult netResult=new NetResult(0,"发布失败！");
             return netResult;
         }
     }

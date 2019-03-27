@@ -5,6 +5,8 @@ import link.lycreate.bluefatty.utils.NetResult;
 import link.lycreate.bluefatty.utils.ServiceResult;
 import org.apache.ibatis.annotations.Param;
 
+import javax.annotation.security.PermitAll;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -16,13 +18,21 @@ import java.util.List;
  */
 public interface OrderService {
     /**
-     * 获取所有需求
+     * description
      * @author LYcreate
-     * @date 2019/3/22 16:01
-     * @param
+     * @date 2019/3/26 19:41
+     * @param pageNow
+    universityId
+    place
+    lowDeadline
+    highDeadline
+    lowPrice
+    highPrice
+    type
      * @return java.util.List<link.lycreate.bluefatty.utils.DemandResult>
      */
-   List<DemandResult> getAllDemands(int pageNow);
+   List<DemandResult> getAllDemands(int pageNow,int universityId, List<Integer> place,Timestamp lowDeadline,
+                                    Timestamp highDeadline, int lowPrice, int highPrice,List<Integer> type);
    /**
     * description
     * @author LYcreate
@@ -59,7 +69,7 @@ public interface OrderService {
    highPrice
     * @return java.util.List<link.lycreate.bluefatty.utils.DemandResult>
     */
-   List<DemandResult>getDmdByPrice(@Param("pageNow") int pageNow, @Param("lowPrice") int lowPrice, @Param("highPrice") int highPrice);
+   List<DemandResult>getDmdByPrice(int pageNow, int lowPrice, int highPrice);
    /**
     * description
     * @author LYcreate
@@ -80,11 +90,20 @@ public interface OrderService {
    /**
     * description
     * @author LYcreate
-    * @date 2019/3/24 9:37
+    * @date 2019/3/26 21:58
     * @param pageNow
+   universityId
+   place
+   lowDeadline
+   highDeadline
+   lowPrice
+   highPrice
+   type
+   keyword
     * @return java.util.List<link.lycreate.bluefatty.utils.ServiceResult>
     */
-   List<ServiceResult> getAllServices(int pageNow);
+   List<ServiceResult> getAllServices(int pageNow,int universityId, List<Integer> place,Timestamp lowDeadline,
+                                      Timestamp highDeadline, int lowPrice, int highPrice,List<Integer> type);
    /**
     * description
     * @author LYcreate
@@ -141,4 +160,17 @@ public interface OrderService {
    String getServiceByServiceId(int serviceId);
 
    NetResult applyService(String token, int serviceId);
+   /**
+    * description
+    * @author LYcreate
+    * @date 2019/3/26 9:54
+    * @param servantId
+   typeId
+   placeId
+   price
+   lowDeadline
+   highDeadline
+    * @return link.lycreate.bluefatty.utils.NetResult
+    */
+   NetResult addService(int servantId, int typeId, int placeId, int price, Timestamp lowDeadline, Timestamp highDeadline);
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName UniversityServiceImpl
@@ -20,8 +21,8 @@ public class UniversityServiceImpl implements UniversityService {
     public UniversityDao universityDao;
 
     @Override
-    public List<UniversityResult> getAllUniversity() {
-        List<UniversityResult> university=universityDao.selectAllUniversity();
+    public  Map<String,Object> getAllUniversity() {
+        Map<String,Object> university=universityDao.selectUniversityMap();
         return university;
     }
 }

@@ -2,6 +2,7 @@ package link.lycreate.bluefatty.controller;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import link.lycreate.bluefatty.service.OrderService;
+import link.lycreate.bluefatty.service.UserService;
 import link.lycreate.bluefatty.utils.DemandResult;
 import link.lycreate.bluefatty.utils.NetResult;
 import link.lycreate.bluefatty.utils.ServiceResult;
@@ -27,10 +28,49 @@ import java.util.Map;
 public class OrderController {
     @Autowired
     OrderService orderService;
+    @Autowired
+    UserService userService;
     @RequestMapping("/getAllDemands")
     public @ResponseBody
-    Map<String,Object> getAllDemands(@RequestParam int pageNow){
-        List<DemandResult> dmdArray=orderService.getAllDemands(pageNow);
+    Map<String,Object> getAllDemands(HttpServletRequest request){
+        String a=null;
+        System.out.println("a");
+        System.out.println(a==null);
+        //pageNow
+        String strPageNow=request.getParameter("pageNow");
+        int pageNow=Integer.parseInt(strPageNow);
+        String strUniversityId=request.getParameter("universityId");
+        Integer universityId=Integer.parseInt(strUniversityId);
+        //place
+        String strPlace=request.getParameter("place");
+        String[] placeArray=strPlace.split("\\[|,|\\]");
+        List<Integer> place=new ArrayList<>();
+        for (int i = 1; i < placeArray.length; i++) {
+            System.out.println(placeArray[i]);
+            place.add(Integer.parseInt(placeArray[i]));
+        }
+        //deadline
+        String strLowDeadline=request.getParameter("lowDeadline");
+        System.out.println(strLowDeadline.equals("null"));
+        Timestamp lowDeadline=strLowDeadline.equals("null")?null:Timestamp.valueOf(strLowDeadline);
+        String strHighDeadline=request.getParameter("highDeadline");
+        Timestamp highDeadline=strLowDeadline.equals("null")?null:Timestamp.valueOf(strHighDeadline);
+        //type
+        String strType=request.getParameter("type");
+        System.out.println("strPlace"+strType);
+        String[] typeArray=strType.split("\\[|,|\\]");
+        List<Integer> type=new ArrayList<>();
+        for (int i = 1; i < typeArray.length; i++) {
+            System.out.println(typeArray[i]);
+            type.add(Integer.parseInt(typeArray[i]));
+        }
+        //price
+        String strLowPrice=request.getParameter("lowPrice");
+        String strHighPrice=request.getParameter("highPrice");
+        Integer lowPrice=strLowPrice.equals("null")?-1:Integer.parseInt(strLowPrice);
+        Integer highPrice=strHighPrice.equals("null")?-1:Integer.parseInt(strHighPrice);
+        List<DemandResult> dmdArray=orderService.getAllDemands(pageNow,universityId,place,lowDeadline,highDeadline,
+                lowPrice,highPrice,type);
         Map<String,Object> resultMap=new HashMap<>();
         resultMap.put("dmdArray",dmdArray);
         return resultMap;
@@ -120,12 +160,46 @@ public class OrderController {
         resultMap.put("content",contet);
         return resultMap;
     }
-
+//    @RequestMapping("/publishDemand")
+//    public @ResponseBody NetResult publishDemand(HttpServletRequest request){
+//
+//    }
     @RequestMapping("/getAllServices")
     public @ResponseBody Map<String,Object> getAllServices(HttpServletRequest request){
+        //pageNow
         String strPageNow=request.getParameter("pageNow");
         int pageNow=Integer.parseInt(strPageNow);
-        List<ServiceResult> serviceArray=orderService.getAllServices(pageNow);
+        String strUniversityId=request.getParameter("universityId");
+        Integer universityId=Integer.parseInt(strUniversityId);
+        //place
+        String strPlace=request.getParameter("place");
+        String[] placeArray=strPlace.split("\\[|,|\\]");
+        List<Integer> place=new ArrayList<>();
+        for (int i = 1; i < placeArray.length; i++) {
+            System.out.println(placeArray[i]);
+            place.add(Integer.parseInt(placeArray[i]));
+        }
+        //deadline
+        String strLowDeadline=request.getParameter("lowDeadline");
+        Timestamp lowDeadline=strLowDeadline.equals("null")?null:Timestamp.valueOf(strLowDeadline);
+        String strHighDeadline=request.getParameter("highDeadline");
+        Timestamp highDeadline=strHighDeadline.equals("null")?null:Timestamp.valueOf(strHighDeadline);
+        //type
+        String strType=request.getParameter("type");
+        System.out.println("strPlace"+strType);
+        String[] typeArray=strType.split("\\[|,|\\]");
+        List<Integer> type=new ArrayList<>();
+        for (int i = 1; i < typeArray.length; i++) {
+            System.out.println(typeArray[i]);
+            type.add(Integer.parseInt(typeArray[i]));
+        }
+        //price
+        String strLowPrice=request.getParameter("lowPrice");
+        String strHighPrice=request.getParameter("highPrice");
+        int lowPrice=strLowPrice.equals("null")?-1:Integer.parseInt(strLowPrice);
+        int highPrice=strHighPrice.equals("null")?-1:Integer.parseInt(strHighPrice);
+        List<ServiceResult> serviceArray=orderService.getAllServices(pageNow,universityId,place,lowDeadline,highDeadline,
+                lowPrice,highPrice,type);
         Map<String,Object> resultMap=new HashMap<>();
         resultMap.put("serviceArray",serviceArray);
         return resultMap;
@@ -209,6 +283,25 @@ public class OrderController {
         Map<String,Object> resultMap=new HashMap<>();
         resultMap.put("content",content);
         return resultMap;
+    }
+
+    @RequestMapping("/publishService")
+    public @ResponseBody NetResult publishService(HttpServletRequest request){
+        String content=request.getParameter("content");
+        String strPrice=request.getParameter("price");
+        int price=Integer.parseInt(strPrice);
+        String strLowDeadline=request.getParameter("lowDeadline");
+        Timestamp lowDeadline=Timestamp.valueOf(strLowDeadline);
+        String strHighDeadline=request.getParameter("highDeadline");
+        Timestamp highDeadline=Timestamp.valueOf(strHighDeadline);
+        String strPlaceId=request.getParameter("placeId");
+        int placeId=Integer.parseInt(strPlaceId);
+        String strTypeId=request.getParameter("typeId");
+        int typeId=Integer.parseInt(strTypeId);
+        String token=request.getHeader("token");
+        int servantId=userService.getUserIdByToken(token);
+        NetResult netResult=orderService.addService(servantId,typeId,placeId,price,lowDeadline,highDeadline);
+        return netResult;
     }
 
     @RequestMapping("/applyService")

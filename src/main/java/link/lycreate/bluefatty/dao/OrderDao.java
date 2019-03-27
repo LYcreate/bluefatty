@@ -70,11 +70,22 @@ public interface OrderDao {
     /**
      * description
      * @author LYcreate
-     * @date 2019/3/22 20:49
+     * @date 2019/3/26 21:56
      * @param pageNow
-     * @return java.util.List<link.lycreate.bluefatty.model.Order>
+    universityId
+    place
+    lowDeadline
+    highDeadline
+    lowPrice
+    highPrice
+    type
+    keyword
+     * @return java.util.List<link.lycreate.bluefatty.utils.DemandResult>
      */
-    List<DemandResult> selectDmdByPage(int pageNow);
+    List<DemandResult> selectDmdByPage(@Param("pageNow")int pageNow, @Param("universityId")int universityId,
+                                       @Param("place") List<Integer> place, @Param("lowDeadline")Timestamp lowDeadline,
+                                       @Param("highDeadline")Timestamp highDeadline, @Param("lowPrice")int lowPrice,
+                                       @Param("highPrice")int highPrice, @Param("type")List<Integer> type);
     /**
      * description
      * @author LYcreate
@@ -133,11 +144,22 @@ public interface OrderDao {
     /**
      * description
      * @author LYcreate
-     * @date 2019/3/24 9:39
+     * @date 2019/3/26 21:57
      * @param pageNow
+    universityId
+    place
+    lowDeadline
+    highDeadline
+    lowPrice
+    highPrice
+    type
+    keyword
      * @return java.util.List<link.lycreate.bluefatty.utils.ServiceResult>
      */
-    List<ServiceResult> selectServiceByPage(int pageNow);
+    List<ServiceResult> selectServiceByPage(@Param("pageNow")int pageNow, @Param("universityId")int universityId,
+                                       @Param("place") List<Integer> place, @Param("lowDeadline")Timestamp lowDeadline,
+                                       @Param("highDeadline")Timestamp highDeadline, @Param("lowPrice")int lowPrice,
+                                       @Param("highPrice")int highPrice, @Param("type")List<Integer> type);
     /**
      * description
      * @author LYcreate
@@ -202,5 +224,20 @@ public interface OrderDao {
     status
      * @return int
      */
-    int updateByServiceId(@Param("token") String token,@Param("serviceId") int serviceId,@Param("status") int status);
+    int updateByServiceId(@Param("token") String token,@Param("serviceId") int serviceId,@Param("status") int status);//还未实现sql
+
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/26 10:02
+     * @param servantId
+    typeId
+    placeId
+    price
+    lowDeadline
+    highDeadline
+     * @return int
+     */
+    int insertService(@Param("servantId") int servantId,@Param("typeId") int typeId,@Param("placeId") int placeId,@Param("price") int price,
+            @Param("lowDeadline") Timestamp lowDeadline,@Param("highDeadline") Timestamp highDeadline);
 }

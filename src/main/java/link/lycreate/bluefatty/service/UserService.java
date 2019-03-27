@@ -1,6 +1,8 @@
 package link.lycreate.bluefatty.service;
 
+import link.lycreate.bluefatty.utils.LoginResult;
 import link.lycreate.bluefatty.utils.NetResult;
+import org.springframework.web.multipart.MultipartFile;
 import sun.nio.ch.Net;
 
 /**
@@ -33,7 +35,7 @@ public interface UserService {
      * @param code
      * @return link.lycreate.bluefatty.utils.NetResult
      */
-    public NetResult userLogin(String code);
+    public LoginResult userLogin(String code);
     /**
      * description
      * 验证是否存在该token
@@ -54,5 +56,24 @@ public interface UserService {
     token
      * @return link.lycreate.bluefatty.utils.NetResult
      */
-    public NetResult signUp(String userName,String stuName,String stuId,int universityId,String token);
+    public NetResult verifyStuInfo(String userName,String stuName,String stuId,int universityId,String token);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/26 11:05
+     * @param token
+     * @return int
+     */
+    public int getUserIdByToken(String token);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/27 15:45
+     * @param userId
+    file
+    location
+    imgType
+     * @return link.lycreate.bluefatty.utils.NetResult
+     */
+    public NetResult uploadImg(int userId, MultipartFile file, String location, String imgType,int pos);
 }
