@@ -6,6 +6,7 @@ import link.lycreate.bluefatty.service.UserService;
 import link.lycreate.bluefatty.utils.DemandResult;
 import link.lycreate.bluefatty.utils.NetResult;
 import link.lycreate.bluefatty.utils.ServiceResult;
+import link.lycreate.bluefatty.utils.StrUtil;
 import org.omg.CORBA.OBJ_ADAPTER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @ClassName OrderController
@@ -160,10 +158,31 @@ public class OrderController {
         resultMap.put("content",contet);
         return resultMap;
     }
-//    @RequestMapping("/publishDemand")
-//    public @ResponseBody NetResult publishDemand(HttpServletRequest request){
-//
-//    }
+    @RequestMapping("/publishDemand")
+    public @ResponseBody NetResult publishDemand(HttpServletRequest request){
+        System.out.println("进入");
+        String token=request.getHeader("token");
+        Integer userId=userService.getUserIdByToken(token);
+        if (userId==0){
+            return new NetResult(0,"会话错误！");
+        }
+        System.out.println("userId:"+userId);
+        String strDeadline=request.getParameter("deadline");
+        Timestamp deadline=Timestamp.valueOf(strDeadline);
+        Date date=new Date();
+        Timestamp createTime=new Timestamp(date.getTime());
+        String strTypeId=request.getParameter("typeId");
+        int typeId=Integer.parseInt(strTypeId);
+        String strPlaceId=request.getParameter("placeId");
+        int placeId=Integer.parseInt(strPlaceId);
+        String strPrice=request.getParameter("price");
+        int price=Integer.parseInt(strPrice);
+        String content=request.getParameter("content");
+        String title=StrUtil.cutStr(content,32);
+        NetResult netResult=orderService.publishDemand(userId,createTime,deadline,typeId,placeId,price,title,content);
+        System.out.println(netResult.toString());
+        return netResult;
+    }
     @RequestMapping("/getAllServices")
     public @ResponseBody Map<String,Object> getAllServices(HttpServletRequest request){
         //pageNow
