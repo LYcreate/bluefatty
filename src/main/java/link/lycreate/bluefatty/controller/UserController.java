@@ -28,6 +28,7 @@ public class UserController {
     private String location;
     @RequestMapping("/login")
     public @ResponseBody LoginResult login(HttpServletRequest request){
+        System.out.println("login");
         String code=request.getParameter("code");
         LoginResult loginResult;
         if (code==null){

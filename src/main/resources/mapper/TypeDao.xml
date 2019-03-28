@@ -49,4 +49,7 @@
     set content = #{content,jdbcType=VARCHAR}
     where type_id = #{typeId,jdbcType=INTEGER}
   </update>
+  <select id="selectTypeMap" resultType="java.util.Map">
+    select type_id,content from type
+  </select>
 </mapper>

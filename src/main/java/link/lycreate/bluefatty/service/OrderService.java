@@ -172,5 +172,40 @@ public interface OrderService {
    highDeadline
     * @return link.lycreate.bluefatty.utils.NetResult
     */
-   NetResult addService(int servantId, int typeId, int placeId, int price, Timestamp lowDeadline, Timestamp highDeadline);
+   NetResult addService(int servantId, int typeId, int placeId, int price, Timestamp lowDeadline, Timestamp highDeadline,
+                        String title,String content);
+   /**
+    * description
+    * @author LYcreate
+    * @date 2019/3/28 8:34
+    * @param userId
+   createTime
+   deadline
+   typeId
+   placeId
+   price
+   title
+   content
+    * @return link.lycreate.bluefatty.utils.NetResult
+    */
+   NetResult publishDemand(int userId,Timestamp createTime,Timestamp deadline,int typeId,int placeId,int price,
+                           String title,String content);
+   /**
+    * description
+    * @author LYcreate
+    * @date 2019/3/28 17:42
+    * @param dmderId
+   dmdId
+    * @return link.lycreate.bluefatty.utils.NetResult
+    */
+   NetResult deleteDemand(int dmderId,int dmdId);
+   /**
+    * description
+    * @author LYcreate
+    * @date 2019/3/28 18:13
+    * @param servantId
+   serviceId
+    * @return link.lycreate.bluefatty.utils.NetResult
+    */
+   NetResult deleteService(int servantId,int serviceId);
 }

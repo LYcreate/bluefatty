@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.security.MessageDigest;
 import java.util.Base64;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -88,7 +89,7 @@ public class UserServiceImpl implements UserService {
                     return loginResult;
                 }
                 int userStatus=userDao.selectUserStatus(userId);
-                loginResult=new LoginResult(1,code,userStatus,userId);
+                loginResult=new LoginResult(1,token,userStatus,userId);
                 if (userStatus==1||userStatus==2||userStatus==3){
                     UserInfo userInfo=userDao.selectUserInfo(userId);
                     loginResult.setUserInfo(userInfo);
@@ -97,12 +98,12 @@ public class UserServiceImpl implements UserService {
                 if (userStatus==2||userStatus==3){
                     universityId=userDao.selectUniversityId(userId);
                 }
-                Map<String,Object>placeMap=placeDao.selectPlaceMap(universityId);
-                JSONObject place=new JSONObject(placeMap);
-                Map<String,Object>typeMap=typeDao.selectTypeMap();
-                JSONObject type=new JSONObject(typeMap);
-                Map<String,Object>universityMap=universityDao.selectUniversityMap();
-                JSONObject university=new JSONObject(universityMap);
+                List<Map<String,Object>> placeList=placeDao.selectPlaceMap(universityId);
+                List<Map<String,Object>> typeList=typeDao.selectTypeMap();
+                List<Map<String,Object>> universityList=universityDao.selectUniversityMap();
+                Map<String,Object> place=ListTrans.listToMap(placeList,"place_id","content");
+                Map<String,Object> type=ListTrans.listToMap(typeList,"type_id","content");
+                Map<String,Object> university=ListTrans.listToMap(universityList,"university_id","university_name");
                 System.out.println("已取出结果");
                 System.out.println(place.toString());
                 loginResult.setUniversityId(universityId);
@@ -122,6 +123,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean verifyToken(String token) {
         int tokenCount=userDao.countByToken(token);
+        System.out.println(tokenCount);
         boolean verifyResult=tokenCount==1?true:false;
         return verifyResult;
     }

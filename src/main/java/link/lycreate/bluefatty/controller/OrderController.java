@@ -2,6 +2,7 @@ package link.lycreate.bluefatty.controller;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import link.lycreate.bluefatty.service.OrderService;
+import link.lycreate.bluefatty.service.RecordsService;
 import link.lycreate.bluefatty.service.UserService;
 import link.lycreate.bluefatty.utils.DemandResult;
 import link.lycreate.bluefatty.utils.NetResult;
@@ -28,6 +29,7 @@ public class OrderController {
     OrderService orderService;
     @Autowired
     UserService userService;
+
     @RequestMapping("/getAllDemands")
     public @ResponseBody
     Map<String,Object> getAllDemands(HttpServletRequest request){
@@ -73,70 +75,81 @@ public class OrderController {
         resultMap.put("dmdArray",dmdArray);
         return resultMap;
     }
-
-    @RequestMapping("/getDmdByDeadline")
-    public @ResponseBody Map<String, Object> getDmdByDeadline(HttpServletRequest request){
-        String strPageNow=request.getParameter("pageNow");
-        int pageNow=Integer.parseInt(strPageNow);
-        String strLowDeadline=request.getParameter("lowDeadline");
-        Timestamp lowDeadline=Timestamp.valueOf(strLowDeadline);
-        String strHighDeadline=request.getParameter("highDeadline");
-        Timestamp highDeadline=Timestamp.valueOf(strHighDeadline);
-        List<DemandResult> dmdArray=orderService.getDmdByDeadline(pageNow,lowDeadline,highDeadline);
-        Map<String,Object> resultMap=new HashMap<>();
-        resultMap.put("dmdArray",dmdArray);
-        return resultMap;
-    }
-
-    @RequestMapping("/getDmdByPlace")
-    public @ResponseBody Map<String,Object> getDmdByPlaceId(HttpServletRequest request){
-        String strPageNow=request.getParameter("pageNow");
-        int pageNow=Integer.parseInt(strPageNow);
-        String strPlace=request.getParameter("place");
-        System.out.println("strPlace"+strPlace);
-        String[] placeArray=strPlace.split("\\[|,|\\]");
-        List<Integer> place=new ArrayList<>();
-        for (int i = 1; i < placeArray.length; i++) {
-            System.out.println(placeArray[i]);
-            place.add(Integer.parseInt(placeArray[i]));
+    @RequestMapping("/deleteDemand")
+    public @ResponseBody NetResult deleteDemand(HttpServletRequest request){
+        String token=request.getHeader("token");
+        Integer dmderId=userService.getUserIdByToken(token);
+        if (dmderId==null){
+            return  new NetResult(0,"会话错误！");
         }
-        List<DemandResult> dmdArray=orderService.getDmdByPlace(pageNow,place);
-        Map<String,Object> resultMap=new HashMap<>();
-        resultMap.put("dmdArray",dmdArray);
-        return resultMap;
+        String strDmdId=request.getParameter("dmdId");
+        int dmdId=Integer.parseInt(strDmdId);
+        NetResult netResult=orderService.deleteDemand(dmderId,dmdId);
+        return netResult;
     }
-
-    @RequestMapping("/getDmdByType")
-    public @ResponseBody Map<String,Object> getDmdByType(HttpServletRequest request){
-        String strPageNow=request.getParameter("pageNow");
-        int pageNow=Integer.parseInt(strPageNow);
-        String strType=request.getParameter("type");
-        System.out.println("strPlace"+strType);
-        String[] typeArray=strType.split("\\[|,|\\]");
-        List<Integer> type=new ArrayList<>();
-        for (int i = 1; i < typeArray.length; i++) {
-            System.out.println(typeArray[i]);
-            type.add(Integer.parseInt(typeArray[i]));
-        }
-        List<DemandResult> dmdArray=orderService.getDmdByType(pageNow,type);
-        Map<String,Object> resultMap=new HashMap<>();
-        resultMap.put("dmdArray",dmdArray);
-        return resultMap;
-    }
-    @RequestMapping("/getDmdByPrice")
-    public @ResponseBody Map<String,Object> getDmdByPrice(HttpServletRequest request){
-        String strPageNow=request.getParameter("pageNow");
-        int pageNow=Integer.parseInt(strPageNow);
-        System.out.println("controller"+pageNow);
-        String strLowPrice=request.getParameter("lowPrice");
-        String strHighPrice=request.getParameter("highPrice");
-        int lowPrice=Integer.parseInt(strLowPrice);
-        int highPrice=Integer.parseInt(strHighPrice);
-        List<DemandResult> dmdArray=orderService.getDmdByPrice(pageNow,lowPrice,highPrice);
-        Map<String,Object> resultMap=new HashMap<>();
-        resultMap.put("dmdArray",dmdArray);
-        return resultMap;
-    }
+//    @RequestMapping("/getDmdByDeadline")
+//    public @ResponseBody Map<String, Object> getDmdByDeadline(HttpServletRequest request){
+//        String strPageNow=request.getParameter("pageNow");
+//        int pageNow=Integer.parseInt(strPageNow);
+//        String strLowDeadline=request.getParameter("lowDeadline");
+//        Timestamp lowDeadline=Timestamp.valueOf(strLowDeadline);
+//        String strHighDeadline=request.getParameter("highDeadline");
+//        Timestamp highDeadline=Timestamp.valueOf(strHighDeadline);
+//        List<DemandResult> dmdArray=orderService.getDmdByDeadline(pageNow,lowDeadline,highDeadline);
+//        Map<String,Object> resultMap=new HashMap<>();
+//        resultMap.put("dmdArray",dmdArray);
+//        return resultMap;
+//    }
+//
+//    @RequestMapping("/getDmdByPlace")
+//    public @ResponseBody Map<String,Object> getDmdByPlaceId(HttpServletRequest request){
+//        String strPageNow=request.getParameter("pageNow");
+//        int pageNow=Integer.parseInt(strPageNow);
+//        String strPlace=request.getParameter("place");
+//        System.out.println("strPlace"+strPlace);
+//        String[] placeArray=strPlace.split("\\[|,|\\]");
+//        List<Integer> place=new ArrayList<>();
+//        for (int i = 1; i < placeArray.length; i++) {
+//            System.out.println(placeArray[i]);
+//            place.add(Integer.parseInt(placeArray[i]));
+//        }
+//        List<DemandResult> dmdArray=orderService.getDmdByPlace(pageNow,place);
+//        Map<String,Object> resultMap=new HashMap<>();
+//        resultMap.put("dmdArray",dmdArray);
+//        return resultMap;
+//    }
+//
+//    @RequestMapping("/getDmdByType")
+//    public @ResponseBody Map<String,Object> getDmdByType(HttpServletRequest request){
+//        String strPageNow=request.getParameter("pageNow");
+//        int pageNow=Integer.parseInt(strPageNow);
+//        String strType=request.getParameter("type");
+//        System.out.println("strPlace"+strType);
+//        String[] typeArray=strType.split("\\[|,|\\]");
+//        List<Integer> type=new ArrayList<>();
+//        for (int i = 1; i < typeArray.length; i++) {
+//            System.out.println(typeArray[i]);
+//            type.add(Integer.parseInt(typeArray[i]));
+//        }
+//        List<DemandResult> dmdArray=orderService.getDmdByType(pageNow,type);
+//        Map<String,Object> resultMap=new HashMap<>();
+//        resultMap.put("dmdArray",dmdArray);
+//        return resultMap;
+//    }
+//    @RequestMapping("/getDmdByPrice")
+//    public @ResponseBody Map<String,Object> getDmdByPrice(HttpServletRequest request){
+//        String strPageNow=request.getParameter("pageNow");
+//        int pageNow=Integer.parseInt(strPageNow);
+//        System.out.println("controller"+pageNow);
+//        String strLowPrice=request.getParameter("lowPrice");
+//        String strHighPrice=request.getParameter("highPrice");
+//        int lowPrice=Integer.parseInt(strLowPrice);
+//        int highPrice=Integer.parseInt(strHighPrice);
+//        List<DemandResult> dmdArray=orderService.getDmdByPrice(pageNow,lowPrice,highPrice);
+//        Map<String,Object> resultMap=new HashMap<>();
+//        resultMap.put("dmdArray",dmdArray);
+//        return resultMap;
+//    }
 
     @RequestMapping("/getDmdByKeyword")
     public @ResponseBody Map<String,Object> getDmdByKeyword(HttpServletRequest request){
@@ -183,6 +196,7 @@ public class OrderController {
         System.out.println(netResult.toString());
         return netResult;
     }
+
     @RequestMapping("/getAllServices")
     public @ResponseBody Map<String,Object> getAllServices(HttpServletRequest request){
         //pageNow
@@ -223,66 +237,78 @@ public class OrderController {
         resultMap.put("serviceArray",serviceArray);
         return resultMap;
     }
-    @RequestMapping("/getServiceByDeadline")
-    public @ResponseBody Map<String,Object> getServiceByDeadline(HttpServletRequest request){
-        String strPageNow=request.getParameter("pageNow");
-        int pageNow=Integer.parseInt(strPageNow);
-        String strLowDeadline=request.getParameter("lowDeadline");
-        Timestamp lowDeadline=Timestamp.valueOf(strLowDeadline);
-        String strHighDeadline=request.getParameter("highDeadline");
-        Timestamp highDeadline=Timestamp.valueOf(strHighDeadline);
-        List<ServiceResult> serviceArray=orderService.getServiceByDeadline(pageNow,lowDeadline,highDeadline);
-        Map<String,Object> resultMap=new HashMap<>();
-        resultMap.put("serviceArray",serviceArray);
-        return resultMap;
-    }
-    @RequestMapping("/getServiceByPlace")
-    public @ResponseBody Map<String,Object> getServiceByPlace(HttpServletRequest request) {
-        String strPageNow = request.getParameter("pageNow");
-        int pageNow = Integer.parseInt(strPageNow);
-        String strPlace=request.getParameter("place");
-        System.out.println("strPlace"+strPlace);
-        String[] placeArray=strPlace.split("\\[|,|\\]");
-        List<Integer> place=new ArrayList<>();
-        for (int i = 1; i < placeArray.length; i++) {
-            System.out.println(placeArray[i]);
-            place.add(Integer.parseInt(placeArray[i]));
+    @RequestMapping("/deleteService")
+    public @ResponseBody NetResult deleteService(HttpServletRequest request){
+        String token=request.getHeader("token");
+        Integer servantId=userService.getUserIdByToken(token);
+        if (servantId==null){
+            return  new NetResult(0,"会话错误！");
         }
-        List<ServiceResult> serviceArray=orderService.getServiceByPlace(pageNow,place);
-        Map<String,Object> resultMap=new HashMap<>();
-        resultMap.put("serviceArray",serviceArray);
-        return resultMap;
+        String strServiceId=request.getParameter("serviceId");
+        int serviceId=Integer.parseInt(strServiceId);
+        NetResult netResult=orderService.deleteService(servantId,serviceId);
+        return netResult;
     }
-    @RequestMapping("/getServiceByPrice")
-    public @ResponseBody Map<String,Object> getServiceByPrice(HttpServletRequest request){
-        String strPageNow=request.getParameter("pageNow");
-        int pageNow=Integer.parseInt(strPageNow);
-        String strLowPrice=request.getParameter("lowPrice");
-        String strHighPrice=request.getParameter("highPrice");
-        int lowPrice=Integer.parseInt(strLowPrice);
-        int highPrice=Integer.parseInt(strHighPrice);
-        List<ServiceResult> serviceArray=orderService.getServiceByPrice(pageNow,lowPrice,highPrice);
-        Map<String,Object> resultMap=new HashMap<>();
-        resultMap.put("serviceArray",serviceArray);
-        return resultMap;
-    }
-    @RequestMapping("/getServiceByType")
-    public @ResponseBody Map<String,Object> getServiceByType(HttpServletRequest request){
-        String strPageNow=request.getParameter("pageNow");
-        int pageNow=Integer.parseInt(strPageNow);
-        String strType=request.getParameter("type");
-        System.out.println("strPlace"+strType);
-        String[] typeArray=strType.split("\\[|,|\\]");
-        List<Integer> type=new ArrayList<>();
-        for (int i = 1; i < typeArray.length; i++) {
-            System.out.println(typeArray[i]);
-            type.add(Integer.parseInt(typeArray[i]));
-        }
-        List<ServiceResult> serviceArray=orderService.getServiceByType(pageNow,type);
-        Map<String,Object> resultMap=new HashMap<>();
-        resultMap.put("serviceArray",serviceArray);
-        return resultMap;
-    }
+//    @RequestMapping("/getServiceByDeadline")
+//    public @ResponseBody Map<String,Object> getServiceByDeadline(HttpServletRequest request){
+//        String strPageNow=request.getParameter("pageNow");
+//        int pageNow=Integer.parseInt(strPageNow);
+//        String strLowDeadline=request.getParameter("lowDeadline");
+//        Timestamp lowDeadline=Timestamp.valueOf(strLowDeadline);
+//        String strHighDeadline=request.getParameter("highDeadline");
+//        Timestamp highDeadline=Timestamp.valueOf(strHighDeadline);
+//        List<ServiceResult> serviceArray=orderService.getServiceByDeadline(pageNow,lowDeadline,highDeadline);
+//        Map<String,Object> resultMap=new HashMap<>();
+//        resultMap.put("serviceArray",serviceArray);
+//        return resultMap;
+//    }
+//    @RequestMapping("/getServiceByPlace")
+//    public @ResponseBody Map<String,Object> getServiceByPlace(HttpServletRequest request) {
+//        String strPageNow = request.getParameter("pageNow");
+//        int pageNow = Integer.parseInt(strPageNow);
+//        String strPlace=request.getParameter("place");
+//        System.out.println("strPlace"+strPlace);
+//        String[] placeArray=strPlace.split("\\[|,|\\]");
+//        List<Integer> place=new ArrayList<>();
+//        for (int i = 1; i < placeArray.length; i++) {
+//            System.out.println(placeArray[i]);
+//            place.add(Integer.parseInt(placeArray[i]));
+//        }
+//        List<ServiceResult> serviceArray=orderService.getServiceByPlace(pageNow,place);
+//        Map<String,Object> resultMap=new HashMap<>();
+//        resultMap.put("serviceArray",serviceArray);
+//        return resultMap;
+//    }
+//    @RequestMapping("/getServiceByPrice")
+//    public @ResponseBody Map<String,Object> getServiceByPrice(HttpServletRequest request){
+//        String strPageNow=request.getParameter("pageNow");
+//        int pageNow=Integer.parseInt(strPageNow);
+//        String strLowPrice=request.getParameter("lowPrice");
+//        String strHighPrice=request.getParameter("highPrice");
+//        int lowPrice=Integer.parseInt(strLowPrice);
+//        int highPrice=Integer.parseInt(strHighPrice);
+//        List<ServiceResult> serviceArray=orderService.getServiceByPrice(pageNow,lowPrice,highPrice);
+//        Map<String,Object> resultMap=new HashMap<>();
+//        resultMap.put("serviceArray",serviceArray);
+//        return resultMap;
+//    }
+//    @RequestMapping("/getServiceByType")
+//    public @ResponseBody Map<String,Object> getServiceByType(HttpServletRequest request){
+//        String strPageNow=request.getParameter("pageNow");
+//        int pageNow=Integer.parseInt(strPageNow);
+//        String strType=request.getParameter("type");
+//        System.out.println("strPlace"+strType);
+//        String[] typeArray=strType.split("\\[|,|\\]");
+//        List<Integer> type=new ArrayList<>();
+//        for (int i = 1; i < typeArray.length; i++) {
+//            System.out.println(typeArray[i]);
+//            type.add(Integer.parseInt(typeArray[i]));
+//        }
+//        List<ServiceResult> serviceArray=orderService.getServiceByType(pageNow,type);
+//        Map<String,Object> resultMap=new HashMap<>();
+//        resultMap.put("serviceArray",serviceArray);
+//        return resultMap;
+//    }
     @RequestMapping("/getServiceByKeyword")
     public @ResponseBody Map<String,Object> getServiceByKeyword(HttpServletRequest request){
         String strPage=request.getParameter("pageNow");
@@ -310,6 +336,7 @@ public class OrderController {
         String strPrice=request.getParameter("price");
         int price=Integer.parseInt(strPrice);
         String strLowDeadline=request.getParameter("lowDeadline");
+        System.out.println(strLowDeadline);
         Timestamp lowDeadline=Timestamp.valueOf(strLowDeadline);
         String strHighDeadline=request.getParameter("highDeadline");
         Timestamp highDeadline=Timestamp.valueOf(strHighDeadline);
@@ -319,17 +346,11 @@ public class OrderController {
         int typeId=Integer.parseInt(strTypeId);
         String token=request.getHeader("token");
         int servantId=userService.getUserIdByToken(token);
-        NetResult netResult=orderService.addService(servantId,typeId,placeId,price,lowDeadline,highDeadline);
+        String title=StrUtil.cutStr(content,32);
+        NetResult netResult=orderService.addService(servantId,typeId,placeId,price,lowDeadline,highDeadline,title,content);
         return netResult;
     }
 
-    @RequestMapping("/applyService")
-    public @ResponseBody NetResult applyService(HttpServletRequest request){
-        String token=request.getHeader("token");
-        String strServiceId=request.getParameter("serviceId");
-        int serviceId=Integer.parseInt(strServiceId);
-        NetResult netResult=orderService.applyService(token,serviceId);
-        return netResult;
-    }
+
 
 }

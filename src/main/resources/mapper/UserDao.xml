@@ -100,12 +100,37 @@
         select count(*) from user where token=#{token}
     </select>
   <insert id="insertSimpleUser">
-    insert into user(open_id,token) values (#{openId},#{token})
+    insert into user(open_id,token,status,university_id) values (#{openId},#{token},0,1)
   </insert>
   <update id="updateToken">
     update user set token=#{token} where user_id=#{userId}
   </update>
   <update id="updateNewUser">
-    update user set user_name=#{userName},stuName=#{stuName},student_id=#{stuId},university_id=#{universityId} where token=#{token}
+    update user set user_name=#{userName},stu_name=#{stuName},student_id=#{stuId},university_id=#{universityId},
+    status=2,credit=0,star=5,star_amount=5,star_time=1 where token=#{token}
+  </update>
+  <select id="selectUserIdByToken" parameterType="String" resultType="int">
+    select user_id from user where token=#{token}
+  </select>
+  <select id="selectUserStatus" parameterType="int" resultType="int">
+    select status from user where user_id=#{userId}
+  </select>
+  <select id="selectUserInfo" resultType="link.lycreate.bluefatty.utils.UserInfo">
+    select user_name as userName,user_img as userImg from user where user_id=#{userId}
+  </select>
+  <select id="selectStuInfo" resultType="link.lycreate.bluefatty.utils.StuInfo">
+    select stu_name,student_id,university_id from user where user_id=#{userId}
+  </select>
+  <select id="selectUniversityId" resultType="int">
+    select university_id from user where user_id=#{userId}
+  </select>
+  <update id="updateUserImg" >
+    update user set user_img=#{finalPath} where user_id=#{userId}
+  </update>
+  <update id="updateStuCardA">
+    update  user set stu_img_1=#{finalPath} where user_id=#{userId}
+  </update>
+  <update id="updateStuCardB" >
+    update user set stu_img_2=#{finalPath} where user_id=#{userId}
   </update>
 </mapper>

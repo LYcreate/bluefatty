@@ -14,6 +14,7 @@ public class DemandResult {
     private Timestamp deadline;
     private Integer placeId;
     private Integer typeId;
+    private String title;
     private String content;
     private Integer price;
     private Integer dmderId;
@@ -21,12 +22,13 @@ public class DemandResult {
     private Integer dmderStar;
     private String dmderImg;
 
-    public DemandResult(Integer dmdId,Timestamp createTime, Timestamp deadline,Integer placeId, Integer typeId,String content, Integer price, Integer dmderId, String dmderName, Integer dmderStar, String dmderImg) {
+    public DemandResult(Integer dmdId, Timestamp createTime, Timestamp deadline, Integer placeId, Integer typeId, String title, String content, Integer price, Integer dmderId, String dmderName, Integer dmderStar, String dmderImg) {
         this.dmdId = dmdId;
         this.createTime = createTime;
-        this.deadline=deadline;
+        this.deadline = deadline;
         this.placeId = placeId;
         this.typeId = typeId;
+        this.title = title;
         this.content = content;
         this.price = price;
         this.dmderId = dmderId;
@@ -59,20 +61,28 @@ public class DemandResult {
         this.deadline = deadline;
     }
 
-    public int getPlaceId() {
+    public Integer getPlaceId() {
         return placeId;
     }
 
-    public void setPlaceId(int placeId) {
+    public void setPlaceId(Integer placeId) {
         this.placeId = placeId;
     }
 
-    public int getTypeId() {
+    public Integer getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(int typeId) {
+    public void setTypeId(Integer typeId) {
         this.typeId = typeId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
@@ -83,19 +93,19 @@ public class DemandResult {
         this.content = content;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public int getDmderId() {
+    public Integer getDmderId() {
         return dmderId;
     }
 
-    public void setDmderId(int dmderId) {
+    public void setDmderId(Integer dmderId) {
         this.dmderId = dmderId;
     }
 
@@ -107,11 +117,11 @@ public class DemandResult {
         this.dmderName = dmderName;
     }
 
-    public int getDmderStar() {
+    public Integer getDmderStar() {
         return dmderStar;
     }
 
-    public void setDmderStar(int dmderStar) {
+    public void setDmderStar(Integer dmderStar) {
         this.dmderStar = dmderStar;
     }
 
@@ -131,6 +141,7 @@ public class DemandResult {
                 ", deadline=" + deadline +
                 ", placeId=" + placeId +
                 ", typeId=" + typeId +
+                ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", price=" + price +
                 ", dmderId=" + dmderId +

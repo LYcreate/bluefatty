@@ -12,5 +12,5 @@ import java.util.Map;
  * @date 2019/3/26 0:30
  */
 public interface UniversityService {
-    Map<String,Object> getAllUniversity();
+    List<Map<String,Object>> getAllUniversity();
 }

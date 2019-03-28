@@ -14,6 +14,7 @@ public class ServiceResult {
     private Timestamp highDeadline;
     private Integer placeId;
     private Integer typeId;
+    private String title;
     private String content;
     private Integer price;
     private Integer servantId;
@@ -21,12 +22,13 @@ public class ServiceResult {
     private Integer servantStar;
     private String servantImg;
 
-    public ServiceResult(Integer serviceId, Timestamp lowDeadline, Timestamp highDeadline, Integer placeId, Integer typeId, String content, Integer price, Integer servantId, String servantName, Integer servantStar, String servantImg) {
+    public ServiceResult(Integer serviceId, Timestamp lowDeadline, Timestamp highDeadline, Integer placeId, Integer typeId, String title, String content, Integer price, Integer servantId, String servantName, Integer servantStar, String servantImg) {
         ServiceId = serviceId;
         this.lowDeadline = lowDeadline;
         this.highDeadline = highDeadline;
         this.placeId = placeId;
         this.typeId = typeId;
+        this.title = title;
         this.content = content;
         this.price = price;
         this.servantId = servantId;
@@ -73,6 +75,14 @@ public class ServiceResult {
 
     public void setTypeId(Integer typeId) {
         this.typeId = typeId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
@@ -131,6 +141,7 @@ public class ServiceResult {
                 ", highDeadline=" + highDeadline +
                 ", placeId=" + placeId +
                 ", typeId=" + typeId +
+                ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", price=" + price +
                 ", servantId=" + servantId +

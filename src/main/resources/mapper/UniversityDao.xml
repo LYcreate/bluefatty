@@ -49,7 +49,7 @@
     set university_name = #{universityName,jdbcType=VARCHAR}
     where university_id = #{universityId,jdbcType=INTEGER}
   </update>
-  <select id="selectAllUniversity" resultType="link.lycreate.bluefatty.utils.UniversityResult">
-    select university_id as universityId,university_name as universityName from university
+  <select id="selectUniversityMap" resultType="java.util.Map">
+    select university_id,university_name from university
   </select>
 </mapper>

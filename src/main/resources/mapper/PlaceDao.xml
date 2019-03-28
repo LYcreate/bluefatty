@@ -49,4 +49,7 @@
     set content = #{content,jdbcType=VARCHAR}
     where place_id = #{placeId,jdbcType=INTEGER}
   </update>
+  <select id="selectPlaceMap" resultType="java.util.Map">
+    select place_id,content from place where university_id=#{universityId}
+  </select>
 </mapper>

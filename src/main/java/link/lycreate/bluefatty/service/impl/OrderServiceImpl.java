@@ -1,6 +1,7 @@
 package link.lycreate.bluefatty.service.impl;
 
 import link.lycreate.bluefatty.dao.OrderDao;
+import link.lycreate.bluefatty.dao.RecordsDao;
 import link.lycreate.bluefatty.service.OrderService;
 import link.lycreate.bluefatty.utils.DemandResult;
 import link.lycreate.bluefatty.utils.NetResult;
@@ -25,7 +26,6 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     @Resource
     private OrderDao orderDao;
-
     @Override
     public List<DemandResult> getAllDemands(int pageNow, int universityId, List<Integer> place, Timestamp lowDeadline,
                                             Timestamp highDeadline, int lowPrice, int highPrice, List<Integer> type) {
@@ -71,6 +71,21 @@ public class OrderServiceImpl implements OrderService {
     public String getDmdByDmdId(int dmdId) {
         String content=orderDao.selectDmdByDmdId(dmdId);
         return content;
+    }
+
+    @Override
+    public NetResult deleteDemand(int dmderId, int dmdId) {
+        int rdmdId=orderDao.selectDmderId(dmdId);
+        if (rdmdId==dmderId){
+            int count=orderDao.deleteByPrimaryKey(dmdId);
+            if (count==1){
+                return new NetResult(1,"删除成功！");
+            }else{
+                return new NetResult(0,"删除失败！");
+            }
+        }else{
+            return new NetResult(0,"删除失败！");
+        }
     }
 
     @Override
@@ -131,13 +146,42 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public NetResult addService(int servantId, int typeId, int placeId, int price, Timestamp lowDeadline, Timestamp highDeadline) {
-        int result=orderDao.insertService(servantId,typeId,placeId,price,lowDeadline,highDeadline);
+    public NetResult addService(int servantId, int typeId, int placeId, int price, Timestamp lowDeadline, Timestamp highDeadline,
+    String title,String content) {
+        int result=orderDao.insertService(servantId,typeId,placeId,price,lowDeadline,highDeadline,title,content);
         if (result==1){
             NetResult netResult=new NetResult(1,"发布成功！");
             return netResult;
         }else {
             NetResult netResult=new NetResult(0,"发布失败！");
+            return netResult;
+        }
+    }
+
+    @Override
+    public NetResult deleteService(int servantId, int serviceId) {
+        int rservantId=orderDao.selectServantId(servantId);
+        if (rservantId==servantId){
+            int count=orderDao.deleteByPrimaryKey(serviceId);
+            if (count==1){
+                return new NetResult(1,"删除成功！");
+            }else{
+                return new NetResult(0,"删除失败！");
+            }
+        }else{
+            return new NetResult(0,"删除失败！");
+        }
+    }
+
+    @Override
+    public NetResult publishDemand(int userId, Timestamp createTime, Timestamp deadline, int typeId, int placeId, int price, String title, String content) {
+        int count=orderDao.insertDemand(userId,createTime,deadline,typeId,placeId,price,title,content);
+        NetResult netResult;
+        if (count==1){
+            netResult=new NetResult(1,"发布成功！");
+            return netResult;
+        }else {
+            netResult=new NetResult(0,"发布失败！");
             return netResult;
         }
     }

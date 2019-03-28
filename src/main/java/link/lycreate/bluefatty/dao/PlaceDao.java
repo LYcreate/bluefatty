@@ -4,6 +4,7 @@ import link.lycreate.bluefatty.model.Place;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -26,6 +27,5 @@ public interface PlaceDao {
      * @param universityId
      * @return java.util.Map<java.lang.Integer,java.lang.Object>
      */
-    @MapKey("uuid")
-    Map<String,Object> selectPlaceMap(int universityId);
+    List<Map<String,Object>> selectPlaceMap(int universityId);
 }

@@ -1,5 +1,6 @@
 package link.lycreate.bluefatty.service.impl;
 
+import javafx.beans.binding.ObjectExpression;
 import link.lycreate.bluefatty.dao.UniversityDao;
 import link.lycreate.bluefatty.service.UniversityService;
 import link.lycreate.bluefatty.utils.UniversityResult;
@@ -21,8 +22,8 @@ public class UniversityServiceImpl implements UniversityService {
     public UniversityDao universityDao;
 
     @Override
-    public  Map<String,Object> getAllUniversity() {
-        Map<String,Object> university=universityDao.selectUniversityMap();
+    public  List<Map<String,Object>> getAllUniversity() {
+        List<Map<String,Object>> university=universityDao.selectUniversityMap();
         return university;
     }
 }

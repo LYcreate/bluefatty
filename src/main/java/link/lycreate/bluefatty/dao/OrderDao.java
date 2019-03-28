@@ -239,5 +239,47 @@ public interface OrderDao {
      * @return int
      */
     int insertService(@Param("servantId") int servantId,@Param("typeId") int typeId,@Param("placeId") int placeId,@Param("price") int price,
-            @Param("lowDeadline") Timestamp lowDeadline,@Param("highDeadline") Timestamp highDeadline);
+            @Param("lowDeadline") Timestamp lowDeadline,@Param("highDeadline") Timestamp highDeadline,
+                      @Param("title") String title,@Param("content") String content);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/28 8:38
+     * @param userId
+    createTime
+    deadline
+    typeId
+    placeId
+    price
+    title
+    content
+     * @return int
+     */
+    int insertDemand(@Param("userId") int userId,@Param("createTime") Timestamp createTime,@Param("deadline") Timestamp deadline,
+                     @Param("typeId") int typeId,@Param("placeId") int placeId,@Param("price") int price,
+                            @Param("title") String title,@Param("content") String content);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/28 11:08
+     * @param orderId
+     * @return int
+     */
+    int selectStatus(int orderId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/28 17:56
+     * @param dmdId
+     * @return int
+     */
+    int selectDmderId(int dmdId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/28 18:16
+     * @param servantId
+     * @return int
+     */
+    int selectServantId(int servantId);
 }

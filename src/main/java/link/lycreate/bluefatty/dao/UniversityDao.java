@@ -4,6 +4,7 @@ import link.lycreate.bluefatty.model.University;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
 import java.util.Map;
 @Mapper
 public interface UniversityDao {
@@ -18,6 +19,6 @@ public interface UniversityDao {
     int updateByPrimaryKeySelective(University record);
 
     int updateByPrimaryKey(University record);
-    @MapKey("uuid")
-    Map<String,Object> selectUniversityMap();
+
+    List<Map<String,Object>> selectUniversityMap();
 }
