@@ -160,7 +160,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public NetResult deleteService(int servantId, int serviceId) {
-        int rservantId=orderDao.selectServantId(servantId);
+        int rservantId=orderDao.selectServantId(serviceId);
         if (rservantId==servantId){
             int count=orderDao.deleteByPrimaryKey(serviceId);
             if (count==1){

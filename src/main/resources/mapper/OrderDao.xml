@@ -354,6 +354,6 @@
     select dmder_id from orders where order_id=#{dmdId}
   </select>
   <select id="selectServantId" resultType="int">
-    select servant_id from orders where order_id=#{servantId}
+    select servant_id from orders where order_id=#{serviceId}
   </select>
 </mapper>

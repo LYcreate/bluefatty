@@ -249,6 +249,7 @@ public class OrderController {
         NetResult netResult=orderService.deleteService(servantId,serviceId);
         return netResult;
     }
+
 //    @RequestMapping("/getServiceByDeadline")
 //    public @ResponseBody Map<String,Object> getServiceByDeadline(HttpServletRequest request){
 //        String strPageNow=request.getParameter("pageNow");

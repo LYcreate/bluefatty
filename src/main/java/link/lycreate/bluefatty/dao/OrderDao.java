@@ -281,5 +281,5 @@ public interface OrderDao {
      * @param servantId
      * @return int
      */
-    int selectServantId(int servantId);
+    int selectServantId(int serviceId);
 }
