@@ -208,4 +208,6 @@ public interface OrderService {
     * @return link.lycreate.bluefatty.utils.NetResult
     */
    NetResult deleteService(int servantId,int serviceId);
+
+   NetResult confirmService(int servantId,int dmderId,int serviceId);
 }

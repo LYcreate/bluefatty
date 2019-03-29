@@ -2,6 +2,8 @@ package link.lycreate.bluefatty.service.impl;
 
 import link.lycreate.bluefatty.dao.OrderDao;
 import link.lycreate.bluefatty.dao.RecordsDao;
+import link.lycreate.bluefatty.model.Order;
+import link.lycreate.bluefatty.model.Records;
 import link.lycreate.bluefatty.service.OrderService;
 import link.lycreate.bluefatty.utils.DemandResult;
 import link.lycreate.bluefatty.utils.NetResult;
@@ -26,6 +28,8 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     @Resource
     private OrderDao orderDao;
+    @Resource
+    private RecordsDao recordsDao;
     @Override
     public List<DemandResult> getAllDemands(int pageNow, int universityId, List<Integer> place, Timestamp lowDeadline,
                                             Timestamp highDeadline, int lowPrice, int highPrice, List<Integer> type) {
@@ -184,5 +188,41 @@ public class OrderServiceImpl implements OrderService {
             netResult=new NetResult(0,"发布失败！");
             return netResult;
         }
+    }
+
+    @Override
+    public NetResult confirmService(int servantId,int dmderId, int serviceId) {
+        NetResult netResult;
+        Order service=orderDao.selectByPrimaryKey(serviceId);
+        int orderStatus=service.getStatus();
+        if (service==null){
+            netResult=new NetResult(0,"订单不存在！");
+        }else if(service.getServantId()!=servantId){
+            netResult=new NetResult(0,"无权限！");
+        }else if(orderStatus>=2){
+            netResult=new NetResult(0,"已达成订单无法更改！");
+        }else if(orderStatus==-1){
+            netResult=new NetResult(0,"订单已过期！");
+        }else if(orderStatus==1){
+            netResult=new NetResult(0,"需求单无法指定雇主！");
+        } else {
+//            Records record=recordsDao.selectRecordByDmderIdAndServiceId(dmderId,serviceId);
+//            int recordStatus=record.getStatus();
+//            if (recordStatus==1){
+//                netResult=new NetResult(0,"订单状态异常！");
+//            }else if(recordStatus>2){
+//                netResult=new NetResult(0,"已达成订单无法更改！")
+//            }else if(recordStatus==-1){
+//                netResult=new NetResult(0,"订单已过期！");
+//            }else {
+//                int orderFlag=orderDao.updateServiceConfirm(dmderId,serviceId,2);
+//                if (orderFlag==1)                {
+//                   netResult=new NetResult(1,"订单已达成！");
+//                }else {
+//                    netResult=new NetResult(0,"订单达成失败！");
+//                }
+            netResult=new NetResult(1,"TODO");
+        }
+            return netResult;
     }
 }

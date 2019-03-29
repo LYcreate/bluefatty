@@ -333,6 +333,11 @@ public class OrderController {
 
     @RequestMapping("/publishService")
     public @ResponseBody NetResult publishService(HttpServletRequest request){
+        String token=request.getHeader("token");
+        Integer servantId=userService.getUserIdByToken(token);
+        if (servantId==null){
+            return new NetResult(0,"会话错误！");
+        }
         String content=request.getParameter("content");
         String strPrice=request.getParameter("price");
         int price=Integer.parseInt(strPrice);
@@ -345,13 +350,25 @@ public class OrderController {
         int placeId=Integer.parseInt(strPlaceId);
         String strTypeId=request.getParameter("typeId");
         int typeId=Integer.parseInt(strTypeId);
-        String token=request.getHeader("token");
-        int servantId=userService.getUserIdByToken(token);
         String title=StrUtil.cutStr(content,32);
         NetResult netResult=orderService.addService(servantId,typeId,placeId,price,lowDeadline,highDeadline,title,content);
         return netResult;
     }
 
+    @RequestMapping("/confirmService")
+    public @ResponseBody NetResult confirmService(HttpServletRequest request){
+        String token=request.getHeader("token");
+        Integer servantId=userService.getUserIdByToken(token);
+        if (servantId==null){
+            return new NetResult(0,"会话错误！");
+        }
+        String strDmderId=request.getParameter("dmderId");
+        Integer dmderId=Integer.parseInt(strDmderId);
+        String strServiceId=request.getParameter("serviceid");
+        Integer serviceId=Integer.parseInt(strServiceId);
+        NetResult netResult=orderService.confirmService(servantId,dmderId,servantId);
+        return netResult;
+    }
 
 
 }
