@@ -181,7 +181,7 @@
   <select id="selectDmdByPage" resultType="link.lycreate.bluefatty.utils.DemandResult">
     <!--<bind name="pattern" value="'%'+keyword+'%'"></bind>-->
         select a.order_id as dmdId,a.create_time as createTime,a.deadline as deadLine,a.place_id as placeId,
-        a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.dmder_id as dmderId,b.user_name as dmderName,
+        a.type_id as typeId,a.title as title,a.price as price,a.dmder_id as dmderId,b.user_name as dmderName,
         b.credit as dmderStar,b.user_img as dmderImg
         from orders a left join user b on a.dmder_id=b.user_id where a.status=1 and a.university_id=#{universityId}
         <if test="place!=null and place.size>0">
@@ -259,7 +259,7 @@
   <select id="selectServiceByPage" resultType="link.lycreate.bluefatty.utils.ServiceResult">
     <!--<bind name="pattern" value="'%'+keyword+'%'"></bind>-->
     select a.order_id as serviceId,a.create_time as lowDeadline,a.deadline as highDeadline,a.place_id as placeId,
-    a.type_id as typeId,a.title as title,a.content as content,a.price as price,a.servant_id as servantId,b.user_name as servantName,
+    a.type_id as typeId,a.title as title,a.price as price,a.servant_id as servantId,b.user_name as servantName,
     b.credit as servantStar,b.user_img as servantImg
     from orders a left join user b on a.servant_id=b.user_id where a.status=0 and a.university_id=#{universityId}
     <if test="place!=null and place.size>0">
@@ -359,4 +359,15 @@
   <update id="updateServiceConfirm">
     update orders set dmder_id=#{dmderId},status=#{status} where order_id=#{serviceId}
   </update>
+  <select id="selectRecordServiceOrder" resultType="link.lycreate.bluefatty.utils.OrderResult">
+    select a.order_id as orderId,a.deadline as deadline,a.place_id as placeId,
+        a.type_id as typeId,a.status as status,a.title as title,a.price as price,a.user_id as posterId,b.user_name as posterName,
+        b.credit as posterStar,b.user_img as posterImg from orders a left join user b on a.user_id=b.user_id left join records c
+        on a.order_id=c.order_id where c.recorder_id=#{servantId} and c.status=0
+  </select>
+  <select id="selectServiceOrderByServiceId" resultType="link.lycreate.bluefatty.utils.OrderResult">
+    select a.order_id as orderId,a.deadline as deadline,a.place_id as placeId,
+        a.type_id as typeId,a.status as status,a.title as title,a.price as price,a.user_id as posterId,b.user_name as posterName,
+        b.credit as posterStar,b.user_img as posterImg from orders a left join user b on a.user_id=b.user_id where a.servant_id=#{servantId}
+  </select>
 </mapper>

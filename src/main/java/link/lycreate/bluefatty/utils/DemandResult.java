@@ -21,20 +21,35 @@ public class DemandResult {
     private String dmderName;
     private Integer dmderStar;
     private String dmderImg;
+    private Integer status;
 
-    public DemandResult(Integer dmdId, Timestamp createTime, Timestamp deadline, Integer placeId, Integer typeId, String title, String content, Integer price, Integer dmderId, String dmderName, Integer dmderStar, String dmderImg) {
+    public DemandResult(Integer dmdId, Timestamp createTime, Timestamp deadline, Integer placeId, Integer typeId, String title,  Integer price, Integer dmderId, String dmderName, Integer dmderStar, String dmderImg) {
         this.dmdId = dmdId;
         this.createTime = createTime;
         this.deadline = deadline;
         this.placeId = placeId;
         this.typeId = typeId;
         this.title = title;
-        this.content = content;
         this.price = price;
         this.dmderId = dmderId;
         this.dmderName = dmderName;
         this.dmderStar = dmderStar;
         this.dmderImg = dmderImg;
+    }
+
+    public DemandResult(Integer dmdId, Timestamp createTime, Timestamp deadline, Integer placeId, Integer typeId, String title, Integer price, Integer dmderId, String dmderName, Integer dmderStar, String dmderImg, Integer status) {
+        this.dmdId = dmdId;
+        this.createTime = createTime;
+        this.deadline = deadline;
+        this.placeId = placeId;
+        this.typeId = typeId;
+        this.title = title;
+        this.price = price;
+        this.dmderId = dmderId;
+        this.dmderName = dmderName;
+        this.dmderStar = dmderStar;
+        this.dmderImg = dmderImg;
+        this.status = status;
     }
 
     public Integer getDmdId() {

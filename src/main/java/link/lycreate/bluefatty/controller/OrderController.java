@@ -4,10 +4,7 @@ import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import link.lycreate.bluefatty.service.OrderService;
 import link.lycreate.bluefatty.service.RecordsService;
 import link.lycreate.bluefatty.service.UserService;
-import link.lycreate.bluefatty.utils.DemandResult;
-import link.lycreate.bluefatty.utils.NetResult;
-import link.lycreate.bluefatty.utils.ServiceResult;
-import link.lycreate.bluefatty.utils.StrUtil;
+import link.lycreate.bluefatty.utils.*;
 import org.omg.CORBA.OBJ_ADAPTER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +21,7 @@ import java.util.*;
  * @Date 2019/3/21 16:30
  */
 @RestController
-public class OrderController {
+public class  OrderController {
     @Autowired
     OrderService orderService;
     @Autowired
@@ -35,7 +32,7 @@ public class OrderController {
     Map<String,Object> getAllDemands(HttpServletRequest request){
         //pageNow
         String strPageNow=request.getParameter("pageNow");
-        int pageNow=Integer.parseInt(strPageNow);
+        int pageNow=10*Integer.parseInt(strPageNow);
         String strUniversityId=request.getParameter("universityId");
         Integer universityId=Integer.parseInt(strUniversityId);
         //place
@@ -191,6 +188,7 @@ public class OrderController {
         String strPlaceId=request.getParameter("placeId");
         int placeId=Integer.parseInt(strPlaceId);
         String strPrice=request.getParameter("price");
+        System.out.println(strPrice);
         int price=Integer.parseInt(strPrice);
         String content=request.getParameter("content");
         String title=StrUtil.cutStr(content,32);
@@ -203,7 +201,7 @@ public class OrderController {
     public @ResponseBody Map<String,Object> getAllServices(HttpServletRequest request){
         //pageNow
         String strPageNow=request.getParameter("pageNow");
-        int pageNow=Integer.parseInt(strPageNow);
+        int pageNow=10*Integer.parseInt(strPageNow);
         String strUniversityId=request.getParameter("universityId");
         Integer universityId=Integer.parseInt(strUniversityId);
         //place
@@ -371,8 +369,14 @@ public class OrderController {
         NetResult netResult=orderService.confirmService(servantId,dmderId,servantId);
         return netResult;
     }
-
-//    @RequestMapping("/getServiceOrder")
-//    public
+    @RequestMapping("/getServiceOrder")
+    public @ResponseBody Map<String,Object> getServiceOrder(HttpServletRequest request){
+        String token=request.getHeader("token");
+        int servantId=userService.getUserIdByToken(token);
+        List<OrderResult> serviceResultList=orderService.getServiceOrder(servantId);
+        Map<String,Object> resultMap=new HashMap<>();
+        resultMap.put("serviceOrderArray",serviceResultList);
+        return resultMap;
+    }
 
 }

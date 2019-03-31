@@ -7,6 +7,7 @@ import link.lycreate.bluefatty.model.Records;
 import link.lycreate.bluefatty.service.OrderService;
 import link.lycreate.bluefatty.utils.DemandResult;
 import link.lycreate.bluefatty.utils.NetResult;
+import link.lycreate.bluefatty.utils.OrderResult;
 import link.lycreate.bluefatty.utils.ServiceResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import sun.nio.ch.Net;
 import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName OrderServiceImpl
@@ -228,4 +230,11 @@ public class OrderServiceImpl implements OrderService {
         return netResult;
     }
 
+    @Override
+    public List<OrderResult> getServiceOrder(int servantId) {
+        List<OrderResult> recordServiceOrder=orderDao.selectRecordServiceOrder(servantId);
+        List<OrderResult> serviceOrderList=orderDao.selectServiceOrderByServiceId(servantId);
+        serviceOrderList.addAll(recordServiceOrder);
+        return serviceOrderList;
+    }
 }

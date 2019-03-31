@@ -2,6 +2,7 @@ package link.lycreate.bluefatty.dao;
 
 import link.lycreate.bluefatty.model.Order;
 import link.lycreate.bluefatty.utils.DemandResult;
+import link.lycreate.bluefatty.utils.OrderResult;
 import link.lycreate.bluefatty.utils.ServiceResult;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -292,4 +293,20 @@ public interface OrderDao {
      * @return int
      */
     int updateServiceConfirm(int dmderId,int orderId,int status);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/1 0:13
+     * @param servantId
+     * @return java.util.List<link.lycreate.bluefatty.utils.ServiceResult>
+     */
+    List<OrderResult> selectRecordServiceOrder(int servantId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/1 0:13
+     * @param servantId
+     * @return java.util.List<link.lycreate.bluefatty.utils.ServiceResult>
+     */
+    List<OrderResult> selectServiceOrderByServiceId(int servantId);
 }

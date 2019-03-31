@@ -21,20 +21,41 @@ public class ServiceResult {
     private String servantName;
     private Integer servantStar;
     private String servantImg;
-
-    public ServiceResult(Integer serviceId, Timestamp lowDeadline, Timestamp highDeadline, Integer placeId, Integer typeId, String title, String content, Integer price, Integer servantId, String servantName, Integer servantStar, String servantImg) {
+    private Integer status;
+    public ServiceResult(Integer serviceId, Timestamp lowDeadline, Timestamp highDeadline, Integer placeId, Integer typeId, String title, Integer price, Integer servantId, String servantName, Integer servantStar, String servantImg) {
         ServiceId = serviceId;
         this.lowDeadline = lowDeadline;
         this.highDeadline = highDeadline;
         this.placeId = placeId;
         this.typeId = typeId;
         this.title = title;
-        this.content = content;
         this.price = price;
         this.servantId = servantId;
         this.servantName = servantName;
         this.servantStar = servantStar;
         this.servantImg = servantImg;
+    }
+
+    public ServiceResult(Integer serviceId, Timestamp highDeadline, Integer placeId, Integer typeId, String title, Integer price, Integer servantId, String servantName, Integer servantStar, String servantImg, Integer status) {
+        ServiceId = serviceId;
+        this.highDeadline = highDeadline;
+        this.placeId = placeId;
+        this.typeId = typeId;
+        this.title = title;
+        this.price = price;
+        this.servantId = servantId;
+        this.servantName = servantName;
+        this.servantStar = servantStar;
+        this.servantImg = servantImg;
+        this.status = status;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Integer getServiceId() {
