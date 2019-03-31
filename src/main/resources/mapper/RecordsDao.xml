@@ -76,4 +76,10 @@
   <delete id="deleteRecord">
     delete from records where order_id=#{orderId} and recorder_id=#{recorderId}
   </delete>
+  <select id="selectRecordByDmderIdAndServiceId" resultMap="BaseResultMap">
+    select * from records where recorder_id=#{dmderId} and order_id=#{service_id}
+  </select>
+  <update id="updateRecords">
+    update records set status=#{status} where order_id=#{orderId} and #{recorderId}
+  </update>
 </mapper>

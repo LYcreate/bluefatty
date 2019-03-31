@@ -30,71 +30,72 @@ public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao;
     @Resource
     private RecordsDao recordsDao;
+
     @Override
     public List<DemandResult> getAllDemands(int pageNow, int universityId, List<Integer> place, Timestamp lowDeadline,
                                             Timestamp highDeadline, int lowPrice, int highPrice, List<Integer> type) {
-        List<DemandResult> orderList=orderDao.selectDmdByPage(pageNow,universityId,place,lowDeadline,highDeadline,
-                lowPrice,highPrice,type);
+        List<DemandResult> orderList = orderDao.selectDmdByPage(pageNow, universityId, place, lowDeadline, highDeadline,
+                lowPrice, highPrice, type);
         System.out.println("返回成功");
         return orderList;
     }
 
     @Override
-    public List<DemandResult> getDmdByDeadline(int pageNow, Timestamp lowDeadline,Timestamp highDeadline) {
-        List<DemandResult> orderList=orderDao.selectDmdByDeadline(pageNow,lowDeadline,highDeadline);
+    public List<DemandResult> getDmdByDeadline(int pageNow, Timestamp lowDeadline, Timestamp highDeadline) {
+        List<DemandResult> orderList = orderDao.selectDmdByDeadline(pageNow, lowDeadline, highDeadline);
         return orderList;
     }
 
     @Override
     public List<DemandResult> getDmdByPlace(int pageNow, List<Integer> place) {
-        List<DemandResult> orderList=orderDao.selectDmdByPlace(pageNow,place);
+        List<DemandResult> orderList = orderDao.selectDmdByPlace(pageNow, place);
         return orderList;
     }
 
     @Override
     public List<DemandResult> getDmdByType(int pageNow, List<Integer> type) {
-        List<DemandResult> orderList=orderDao.selectDmdByType(pageNow,type);
+        List<DemandResult> orderList = orderDao.selectDmdByType(pageNow, type);
         return orderList;
     }
 
     @Override
     public List<DemandResult> getDmdByPrice(int pageNow, int lowPrice, int highPrice) {
-        System.out.println("low:"+lowPrice+"high:"+highPrice);
-        System.out.println("service"+pageNow);
-        List<DemandResult> orderList=orderDao.selectDmdByPrice(pageNow,lowPrice,highPrice);
+        System.out.println("low:" + lowPrice + "high:" + highPrice);
+        System.out.println("service" + pageNow);
+        List<DemandResult> orderList = orderDao.selectDmdByPrice(pageNow, lowPrice, highPrice);
         return orderList;
     }
 
     @Override
     public List<DemandResult> getDmdByKeyword(int pageNow, String keyword) {
-        List<DemandResult> orderList=orderDao.selectDmdByKeyword(pageNow,keyword);
+        List<DemandResult> orderList = orderDao.selectDmdByKeyword(pageNow, keyword);
         return orderList;
     }
 
     @Override
     public String getDmdByDmdId(int dmdId) {
-        String content=orderDao.selectDmdByDmdId(dmdId);
+        String content = orderDao.selectDmdByDmdId(dmdId);
         return content;
     }
 
     @Override
     public NetResult deleteDemand(int dmderId, int dmdId) {
-        int rdmdId=orderDao.selectDmderId(dmdId);
-        if (rdmdId==dmderId){
-            int count=orderDao.deleteByPrimaryKey(dmdId);
-            if (count==1){
-                return new NetResult(1,"删除成功！");
-            }else{
-                return new NetResult(0,"删除失败！");
+        int rdmdId = orderDao.selectDmderId(dmdId);
+        if (rdmdId == dmderId) {
+            int count = orderDao.deleteByPrimaryKey(dmdId);
+            if (count == 1) {
+                return new NetResult(1, "删除成功！");
+            } else {
+                return new NetResult(0, "删除失败！");
             }
-        }else{
-            return new NetResult(0,"删除失败！");
+        } else {
+            return new NetResult(0, "删除失败！");
         }
     }
 
     @Override
-    public List<ServiceResult> getAllServices(int pageNow, int universityId, List<Integer> place,Timestamp lowDeadline,
-                                              Timestamp highDeadline, int lowPrice, int highPrice,List<Integer> type) {
+    public List<ServiceResult> getAllServices(int pageNow, int universityId, List<Integer> place, Timestamp lowDeadline,
+                                              Timestamp highDeadline, int lowPrice, int highPrice, List<Integer> type) {
         List<ServiceResult> orderList = orderDao.selectServiceByPage(pageNow, universityId, place, lowDeadline, highDeadline,
                 lowPrice, highPrice, type);
         return orderList;
@@ -102,127 +103,129 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<ServiceResult> getServiceByDeadline(int pageNow, Timestamp lowDeadline, Timestamp highDeadline) {
-        List<ServiceResult> orderList=orderDao.selectServiceByDeadline(pageNow,lowDeadline,highDeadline);
+        List<ServiceResult> orderList = orderDao.selectServiceByDeadline(pageNow, lowDeadline, highDeadline);
         return orderList;
     }
 
     @Override
     public List<ServiceResult> getServiceByPlace(int pageNow, List<Integer> place) {
-        List<ServiceResult> orderList=orderDao.selectServiceByPlace(pageNow,place);
+        List<ServiceResult> orderList = orderDao.selectServiceByPlace(pageNow, place);
         return orderList;
     }
 
     @Override
-    public List<ServiceResult> getServiceByPrice(int pageNow, int lowPrice,int highPrice) {
-        List<ServiceResult> orderList=orderDao.selectServiceByPrice(pageNow,lowPrice,highPrice);
+    public List<ServiceResult> getServiceByPrice(int pageNow, int lowPrice, int highPrice) {
+        List<ServiceResult> orderList = orderDao.selectServiceByPrice(pageNow, lowPrice, highPrice);
         return orderList;
     }
 
     @Override
     public List<ServiceResult> getServiceByType(int pageNow, List<Integer> type) {
-        List<ServiceResult> orderList=orderDao.selectServiceByType(pageNow,type);
+        List<ServiceResult> orderList = orderDao.selectServiceByType(pageNow, type);
         return orderList;
     }
 
     @Override
     public List<ServiceResult> getServiceByKeyword(int pageNow, String keyword) {
-        List<ServiceResult> orderList=orderDao.selectServiceByKeyword(pageNow,keyword);
+        List<ServiceResult> orderList = orderDao.selectServiceByKeyword(pageNow, keyword);
         return orderList;
     }
 
     @Override
     public String getServiceByServiceId(int serviceId) {
-        String content=orderDao.selectServiceByServiceId(serviceId);
+        String content = orderDao.selectServiceByServiceId(serviceId);
         return content;
     }
 
     @Override
     public NetResult applyService(String token, int serviceId) {
         //微信服务消息的转发
-        int result=orderDao.updateByServiceId(token,serviceId,2);
-        if (result==1){
-            NetResult netResult=new NetResult(1,"已提交申请!");
+        int result = orderDao.updateByServiceId(token, serviceId, 2);
+        if (result == 1) {
+            NetResult netResult = new NetResult(1, "已提交申请!");
             return netResult;
-        }else {
-            NetResult netResult=new NetResult(0,"提交失败！");
+        } else {
+            NetResult netResult = new NetResult(0, "提交失败！");
             return netResult;
         }
     }
 
     @Override
     public NetResult addService(int servantId, int typeId, int placeId, int price, Timestamp lowDeadline, Timestamp highDeadline,
-    String title,String content) {
-        int result=orderDao.insertService(servantId,typeId,placeId,price,lowDeadline,highDeadline,title,content);
-        if (result==1){
-            NetResult netResult=new NetResult(1,"发布成功！");
+                                String title, String content) {
+        int result = orderDao.insertService(servantId, typeId, placeId, price, lowDeadline, highDeadline, title, content);
+        if (result == 1) {
+            NetResult netResult = new NetResult(1, "发布成功！");
             return netResult;
-        }else {
-            NetResult netResult=new NetResult(0,"发布失败！");
+        } else {
+            NetResult netResult = new NetResult(0, "发布失败！");
             return netResult;
         }
     }
 
     @Override
     public NetResult deleteService(int servantId, int serviceId) {
-        int rservantId=orderDao.selectServantId(serviceId);
-        if (rservantId==servantId){
-            int count=orderDao.deleteByPrimaryKey(serviceId);
-            if (count==1){
-                return new NetResult(1,"删除成功！");
-            }else{
-                return new NetResult(0,"删除失败！");
+        int rservantId = orderDao.selectServantId(serviceId);
+        if (rservantId == servantId) {
+            int count = orderDao.deleteByPrimaryKey(serviceId);
+            if (count == 1) {
+                return new NetResult(1, "删除成功！");
+            } else {
+                return new NetResult(0, "删除失败！");
             }
-        }else{
-            return new NetResult(0,"删除失败！");
+        } else {
+            return new NetResult(0, "删除失败！");
         }
     }
 
     @Override
     public NetResult publishDemand(int userId, Timestamp createTime, Timestamp deadline, int typeId, int placeId, int price, String title, String content) {
-        int count=orderDao.insertDemand(userId,createTime,deadline,typeId,placeId,price,title,content);
+        int count = orderDao.insertDemand(userId, createTime, deadline, typeId, placeId, price, title, content);
         NetResult netResult;
-        if (count==1){
-            netResult=new NetResult(1,"发布成功！");
+        if (count == 1) {
+            netResult = new NetResult(1, "发布成功！");
             return netResult;
-        }else {
-            netResult=new NetResult(0,"发布失败！");
+        } else {
+            netResult = new NetResult(0, "发布失败！");
             return netResult;
         }
     }
 
     @Override
-    public NetResult confirmService(int servantId,int dmderId, int serviceId) {
+    public NetResult confirmService(int servantId, int dmderId, int serviceId) {
         NetResult netResult;
-        Order service=orderDao.selectByPrimaryKey(serviceId);
-        int orderStatus=service.getStatus();
-        if (service==null){
-            netResult=new NetResult(0,"订单不存在！");
-        }else if(service.getServantId()!=servantId){
-            netResult=new NetResult(0,"无权限！");
-        }else if(orderStatus>=2){
-            netResult=new NetResult(0,"已达成订单无法更改！");
-        }else if(orderStatus==-1){
-            netResult=new NetResult(0,"订单已过期！");
-        }else if(orderStatus==1){
-            netResult=new NetResult(0,"需求单无法指定雇主！");
+        Order service = orderDao.selectByPrimaryKey(serviceId);
+        int orderStatus = service.getStatus();
+        if (service == null) {
+            netResult = new NetResult(0, "订单不存在！");
+        } else if (service.getServantId() != servantId) {
+            netResult = new NetResult(0, "无权限！");
+        } else if (orderStatus >= 2) {
+            netResult = new NetResult(0, "已达成订单无法更改！");
+        } else if (orderStatus == -1) {
+            netResult = new NetResult(0, "订单已过期！");
+        } else if (orderStatus == 1) {
+            netResult = new NetResult(0, "需求单无法指定雇主！");
         } else {
-//            Records record=recordsDao.selectRecordByDmderIdAndServiceId(dmderId,serviceId);
-//            int recordStatus=record.getStatus();
-//            if (recordStatus==1){
-//                netResult=new NetResult(0,"订单状态异常！");
-//            }else if(recordStatus>2){
-//                netResult=new NetResult(0,"已达成订单无法更改！")
-//            }else if(recordStatus==-1){
-//                netResult=new NetResult(0,"订单已过期！");
-//            }else {
-//                int orderFlag=orderDao.updateServiceConfirm(dmderId,serviceId,2);
-//                if (orderFlag==1)                {
-//                   netResult=new NetResult(1,"订单已达成！");
-//                }else {
-//                    netResult=new NetResult(0,"订单达成失败！");
-//                }
-            netResult=new NetResult(1,"TODO");
+            Records record = recordsDao.selectRecordByDmderIdAndServiceId(dmderId, serviceId);
+            int recordStatus = record.getStatus();
+            if (recordStatus == 1) {
+                netResult = new NetResult(0, "订单状态异常！");
+            } else if (recordStatus > 2) {
+                netResult = new NetResult(0, "已达成订单无法更改！");
+            } else if (recordStatus == -1) {
+                netResult = new NetResult(0, "订单已过期！");
+            } else {
+                int orderFlag = orderDao.updateServiceConfirm(dmderId, serviceId, 2);
+                int recordsFlag=recordsDao.updateRecords(dmderId, serviceId, 2);
+                if (orderFlag == 1 && recordsFlag==1) {
+                    netResult = new NetResult(1, "订单已达成！");
+                } else {
+                    netResult = new NetResult(0, "订单达成失败！");
+                }
+            }
         }
-            return netResult;
+        return netResult;
     }
+
 }

@@ -33,9 +33,6 @@ public class OrderController {
     @RequestMapping("/getAllDemands")
     public @ResponseBody
     Map<String,Object> getAllDemands(HttpServletRequest request){
-        String a=null;
-        System.out.println("a");
-        System.out.println(a==null);
         //pageNow
         String strPageNow=request.getParameter("pageNow");
         int pageNow=Integer.parseInt(strPageNow);
@@ -43,11 +40,16 @@ public class OrderController {
         Integer universityId=Integer.parseInt(strUniversityId);
         //place
         String strPlace=request.getParameter("place");
-        String[] placeArray=strPlace.split("\\[|,|\\]");
         List<Integer> place=new ArrayList<>();
-        for (int i = 1; i < placeArray.length; i++) {
-            System.out.println(placeArray[i]);
-            place.add(Integer.parseInt(placeArray[i]));
+        if (strPlace.equals("[]")){
+
+        }else{
+            String[] placeArray;
+            placeArray=strPlace.split("\\[|,|\\]");
+            for (int i = 1; i < placeArray.length; i++) {
+                System.out.println(placeArray[i]);
+                place.add(Integer.parseInt(placeArray[i]));
+            }
         }
         //deadline
         String strLowDeadline=request.getParameter("lowDeadline");
@@ -370,5 +372,7 @@ public class OrderController {
         return netResult;
     }
 
+//    @RequestMapping("/getServiceOrder")
+//    public
 
 }

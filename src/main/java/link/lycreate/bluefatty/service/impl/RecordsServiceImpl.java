@@ -25,7 +25,7 @@ public class RecordsServiceImpl implements RecordsService {
     OrderDao orderDao;
     @Override
     public NetResult addRecord(int recorderId, int orderId) {
-        int status=orderDao.selectStatus(recorderId);
+        int status=orderDao.selectStatus(orderId);
         NetResult netResult;
         if (status==1||status==0){
             int count=recordsDao.insert(new Records(recorderId,status,orderId));

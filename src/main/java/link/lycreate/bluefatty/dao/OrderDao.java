@@ -278,8 +278,18 @@ public interface OrderDao {
      * description
      * @author LYcreate
      * @date 2019/3/28 18:16
-     * @param servantId
+     * @param serviceId
      * @return int
      */
     int selectServantId(int serviceId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/3/30 12:37
+     * @param dmderId
+    orderId
+    status
+     * @return int
+     */
+    int updateServiceConfirm(int dmderId,int orderId,int status);
 }

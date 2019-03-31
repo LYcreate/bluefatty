@@ -356,4 +356,7 @@
   <select id="selectServantId" resultType="int">
     select servant_id from orders where order_id=#{serviceId}
   </select>
+  <update id="updateServiceConfirm">
+    update orders set dmder_id=#{dmderId},status=#{status} where order_id=#{serviceId}
+  </update>
 </mapper>
