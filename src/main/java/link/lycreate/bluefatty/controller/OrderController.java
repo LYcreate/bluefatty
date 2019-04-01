@@ -1,15 +1,11 @@
 package link.lycreate.bluefatty.controller;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import link.lycreate.bluefatty.service.OrderService;
-import link.lycreate.bluefatty.service.RecordsService;
 import link.lycreate.bluefatty.service.UserService;
 import link.lycreate.bluefatty.utils.*;
-import org.omg.CORBA.OBJ_ADAPTER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.util.*;
@@ -373,7 +369,7 @@ public class  OrderController {
     public @ResponseBody Map<String,Object> getServiceOrder(HttpServletRequest request){
         String token=request.getHeader("token");
         int servantId=userService.getUserIdByToken(token);
-        List<OrderResult> serviceResultList=orderService.getServiceOrder(servantId);
+        List<ServiceResult> serviceResultList=orderService.getServiceOrder(servantId);
         Map<String,Object> resultMap=new HashMap<>();
         resultMap.put("serviceOrderArray",serviceResultList);
         return resultMap;

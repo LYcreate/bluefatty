@@ -16,6 +16,24 @@
     <result column="comment_id" jdbcType="INTEGER" property="commentId" />
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
+  <resultMap id="orderResult" type="link.lycreate.bluefatty.utils.OrdersResult">
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="user_id" jdbcType="INTEGER" property="posterId" />
+    <result column="user_name" jdbcType="VARCHAR" property="posterName" />
+    <result column="user_img" jdbcType="VARCHAR" property="posterImg" />
+    <result column="deadline" jdbcType="TIMESTAMP" property="deadline" />
+    <result column="place_id" jdbcType="INTEGER" property="placeId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="credit" jdbcType="INTEGER" property="posterStar" />
+  </resultMap>
+  <!--<resultMap id="orderResult" type="link.lycreate.bluefatty.utils.OrdersResultt">-->
+    <!--<id column="order_id" jdbcType="INTEGER" property="orderId" />-->
+    <!--<result column="deadline" jdbcType="TIMESTAMP" property="deadline" />-->
+    <!--<result column="place_id"-->
+  <!--</resultMap>-->
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="link.lycreate.bluefatty.model.Order">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
@@ -359,15 +377,25 @@
   <update id="updateServiceConfirm">
     update orders set dmder_id=#{dmderId},status=#{status} where order_id=#{serviceId}
   </update>
-  <select id="selectRecordServiceOrder" resultType="link.lycreate.bluefatty.utils.OrderResult">
-    select a.order_id as orderId,a.deadline as deadline,a.place_id as placeId,
-        a.type_id as typeId,a.status as status,a.title as title,a.price as price,a.user_id as posterId,b.user_name as posterName,
-        b.credit as posterStar,b.user_img as posterImg from orders a left join user b on a.user_id=b.user_id left join records c
-        on a.order_id=c.order_id where c.recorder_id=#{servantId} and c.status=0
+  <select id="selectRecordServiceOrder" resultType="link.lycreate.bluefatty.utils.ServiceResult">
+    select a.order_id as 'serviceId',a.deadline as 'highDeadline',a.place_id as 'placeId',
+        a.type_id as 'typeId',a.status as 'status',a.title as 'title',a.price as 'price',a.user_id as 'posterId',b.user_name as 'posterName',
+        b.credit as 'posterStar',b.user_img as 'posterImg' from orders a left join user b on a.user_id=b.user_id left join records c
+        on a.order_id=c.order_id where c.recorder_id=#{servantId} and c.status=1
   </select>
-  <select id="selectServiceOrderByServiceId" resultType="link.lycreate.bluefatty.utils.OrderResult">
-    select a.order_id as orderId,a.deadline as deadline,a.place_id as placeId,
-        a.type_id as typeId,a.status as status,a.title as title,a.price as price,a.user_id as posterId,b.user_name as posterName,
-        b.credit as posterStar,b.user_img as posterImg from orders a left join user b on a.user_id=b.user_id where a.servant_id=#{servantId}
+  <!--<select id="selectRecordServiceOrder" resultMap="orderResult">-->
+    <!--select a.order_id,a.deadline,a.place_id,a.type_id,a.status,a.title,a.price,a.user_id,b.user_name,-->
+        <!--b.credit,b.user_img from orders a left join user b on a.user_id=b.user_id left join records c-->
+        <!--on a.order_id=c.order_id where c.recorder_id=#{servantId} and c.status=1-->
+  <!--</select>-->
+  <select id="selectServiceOrderByServiceId" resultType="link.lycreate.bluefatty.utils.ServiceResult">
+    select a.order_id as 'serviceId',a.deadline as 'highDeadline',a.place_id as 'placeId',
+        a.type_id as 'typeId',a.status as 'status',a.title as 'title',a.price as 'price',a.user_id as 'posterId',b.user_name as 'posterName',
+        b.credit as 'posterStar',b.user_img as 'posterImg' from orders a left join user b on a.user_id=b.user_id where a.servant_id=#{servantId}
   </select>
+  <!--<select id="selectServiceOrderByServiceId" resultMap="orderResult">-->
+    <!--select a.order_id,a.deadline,a.place_id,-->
+        <!--a.type_id,a.title,a.price,a.user_id,b.user_name,-->
+        <!--b.credit,b.user_img,a.status from orders a left join user b on a.user_id=b.user_id where a.servant_id=#{servantId}-->
+  <!--</select>-->
 </mapper>

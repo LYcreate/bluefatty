@@ -2,15 +2,12 @@ package link.lycreate.bluefatty.service;
 
 import link.lycreate.bluefatty.utils.DemandResult;
 import link.lycreate.bluefatty.utils.NetResult;
-import link.lycreate.bluefatty.utils.OrderResult;
+import link.lycreate.bluefatty.utils.OrdersResult;
 import link.lycreate.bluefatty.utils.ServiceResult;
 import org.apache.ibatis.annotations.Param;
 
-import javax.annotation.security.PermitAll;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Map;
 
 /**
  * OrderService
@@ -227,6 +224,6 @@ public interface OrderService {
     * @param servantId
     * @return java.util.Map<java.lang.String,java.lang.Object>
     */
-   List<OrderResult> getServiceOrder(int servantId);
+   List<ServiceResult> getServiceOrder(int servantId);
 
 }

@@ -3,12 +3,12 @@ package link.lycreate.bluefatty.utils;
 import java.sql.Timestamp;
 
 /**
- * @ClassName OrderResult
+ * @ClassName OrdersResult
  * @Description TODO
  * @Author LYcreate
  * @Date 2019/4/1 0:27
  */
-public class OrderResult {
+public class OrdersResult {
     private Integer orderId;
     private Timestamp deadline;
     private Integer placeId;
@@ -21,7 +21,7 @@ public class OrderResult {
     private String posterImg;
     private Integer status;
 
-    public OrderResult(Integer orderId, Timestamp deadline, Integer placeId, Integer typeId, String title, Integer price, Integer posterId, String posterName, Integer posterStar, String posterImg, Integer status) {
+    public OrdersResult(Integer orderId, Timestamp deadline, Integer placeId, Integer typeId, String title, Integer price, Integer posterId, String posterName, Integer posterStar, String posterImg, Integer status) {
         this.orderId = orderId;
         this.deadline = deadline;
         this.placeId = placeId;
@@ -125,7 +125,7 @@ public class OrderResult {
 
     @Override
     public String toString() {
-        return "OrderResult{" +
+        return "OrdersResult{" +
                 "orderId=" + orderId +
                 ", deadline=" + deadline +
                 ", placeId=" + placeId +

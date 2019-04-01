@@ -28,7 +28,7 @@ public class RecordsServiceImpl implements RecordsService {
         int status=orderDao.selectStatus(orderId);
         NetResult netResult;
         if (status==1||status==0){
-            int count=recordsDao.insert(new Records(recorderId,status,orderId));
+            int count=recordsDao.insert(new Records(orderId,status,recorderId));
             if (count==1){
                 netResult=new NetResult(1,"提交成功!");
             }else {
