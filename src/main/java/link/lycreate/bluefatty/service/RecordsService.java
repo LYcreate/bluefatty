@@ -27,4 +27,13 @@ public interface RecordsService {
      * @return link.lycreate.bluefatty.utils.NetResult
      */
     NetResult deleteRecord(int recorderId,int orderId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/2 3:20
+     * @param orderId
+     * @return int
+     */
+    int deleteRecordByServiceId(int orderId);
+
 }

@@ -93,6 +93,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<DemandResult> getDmdOrder(int dmderId) {
+        List<DemandResult> recordDmdOrder=orderDao.selectRecordDmdOrder(dmderId);
+        List<DemandResult> dmdOrderList=orderDao.selectDemandOrderByDmdId(dmderId);
+        dmdOrderList.addAll(recordDmdOrder);
+        return dmdOrderList;
+    }
+
+    @Override
     public List<ServiceResult> getAllServices(int pageNow, int universityId, List<Integer> place, Timestamp lowDeadline,
                                               Timestamp highDeadline, int lowPrice, int highPrice, List<Integer> type) {
         List<ServiceResult> orderList = orderDao.selectServiceByPage(pageNow, universityId, place, lowDeadline, highDeadline,
@@ -193,19 +201,19 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public NetResult confirmService(int servantId, int dmderId, int serviceId) {
         NetResult netResult;
-        Order service = orderDao.selectByPrimaryKey(serviceId);
-        int orderStatus = service.getStatus();
-        if (service == null) {
-            netResult = new NetResult(0, "订单不存在！");
-        } else if (service.getServantId() != servantId) {
-            netResult = new NetResult(0, "无权限！");
-        } else if (orderStatus >= 2) {
-            netResult = new NetResult(0, "已达成订单无法更改！");
-        } else if (orderStatus == -1) {
-            netResult = new NetResult(0, "订单已过期！");
-        } else if (orderStatus == 1) {
-            netResult = new NetResult(0, "需求单无法指定雇主！");
-        } else {
+//        Order service = orderDao.selectByPrimaryKey(serviceId);
+//        int orderStatus = service.getStatus();
+//        if (service == null) {
+//            netResult = new NetResult(0, "订单不存在！");
+//        } else if (service.getServantId() != servantId) {
+//            netResult = new NetResult(0, "无权限！");
+//        } else if (orderStatus >= 2) {
+//            netResult = new NetResult(0, "已达成订单无法更改！");
+//        } else if (orderStatus == -1) {
+//            netResult = new NetResult(0, "订单已过期！");
+//        } else if (orderStatus == 1) {
+//            netResult = new NetResult(0, "需求单无法指定雇主！");
+//        } else {
             Records record = recordsDao.selectRecordByDmderIdAndServiceId(dmderId, serviceId);
             int recordStatus = record.getStatus();
             if (recordStatus == 1) {
@@ -223,7 +231,7 @@ public class OrderServiceImpl implements OrderService {
                     netResult = new NetResult(0, "订单达成失败！");
                 }
             }
-        }
+//        }
         return netResult;
     }
 
@@ -233,5 +241,69 @@ public class OrderServiceImpl implements OrderService {
         List<ServiceResult> serviceOrderList=orderDao.selectServiceOrderByServiceId(servantId);
         serviceOrderList.addAll(recordServiceOrder);
         return serviceOrderList;
+    }
+
+    @Override
+    public int getStatusByOrderId(int orderId) {
+        int status=orderDao.selectStatus(orderId);
+        return status;
+    }
+
+    @Override
+    public NetResult finishService(int userId, int serviceId) {
+        int status=orderDao.selectStatus(serviceId);
+        NetResult netResult;
+        if (status == 4) {
+            netResult=new NetResult(0,"该订单已完成！");
+        } else {
+            int count = orderDao.updateServantFinish(userId, serviceId);
+            if (count == 1) {
+                netResult = new NetResult(1, "等待确认！");
+            }else{
+                netResult=new NetResult(0,"操作失败！");
+            }
+        }
+        return netResult;
+    }
+
+    @Override
+    public NetResult confirmDemand(int dmderId, int servantId, int dmdId) {
+        NetResult netResult;
+        Records record = recordsDao.selectRecordByServantAndDmdId(servantId,dmdId);
+        int recordStatus = record.getStatus();
+        if (recordStatus == 0) {
+            netResult = new NetResult(0, "订单状态异常！");
+        } else if (recordStatus > 2) {
+            netResult = new NetResult(0, "已达成订单无法更改！");
+        } else if (recordStatus == -1) {
+            netResult = new NetResult(0, "订单已过期！");
+        } else {
+            int orderFlag = orderDao.updateDemandConfirm(servantId, dmdId, 2);
+            int recordsFlag=recordsDao.updateRecords(servantId, dmdId, 2);
+            if (orderFlag == 1 && recordsFlag==1) {
+                netResult = new NetResult(1, "订单已达成！");
+            } else {
+                netResult = new NetResult(0, "订单达成失败！");
+            }
+        }
+//        }
+        return netResult;
+    }
+
+    @Override
+    public NetResult finishDemand(int userId, int dmdId) {
+        int status=orderDao.selectStatus(dmdId);
+        NetResult netResult;
+        if (status == 4) {
+            netResult=new NetResult(0,"该订单已完成！");
+        } else {
+            int count = orderDao.updateDmderFinish(userId, dmdId);
+            if (count == 1) {
+                netResult = new NetResult(1, "该订单已完成！");
+            }else{
+                netResult=new NetResult(0,"操作失败！");
+            }
+        }
+        return netResult;
     }
 }

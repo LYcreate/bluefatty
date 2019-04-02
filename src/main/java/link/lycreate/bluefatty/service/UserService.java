@@ -1,9 +1,13 @@
 package link.lycreate.bluefatty.service;
 
+import link.lycreate.bluefatty.utils.Demander;
 import link.lycreate.bluefatty.utils.LoginResult;
 import link.lycreate.bluefatty.utils.NetResult;
+import link.lycreate.bluefatty.utils.Servant;
 import org.springframework.web.multipart.MultipartFile;
 import sun.nio.ch.Net;
+
+import java.util.List;
 
 /**
  * UserService
@@ -76,4 +80,52 @@ public interface UserService {
      * @return link.lycreate.bluefatty.utils.NetResult
      */
     public NetResult uploadImg(int userId, MultipartFile file, String location, String imgType,int pos);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/1 23:37
+     * @param orderId
+     * @return java.util.List<link.lycreate.bluefatty.utils.Demander>
+     */
+    public List<Demander> getDmderByOrderId(int orderId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/2 2:04
+     * @param orderId
+     * @return java.util.List<link.lycreate.bluefatty.utils.Demander>
+     */
+    public List<Demander> getOneDmderByOrderId(int orderId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/2 2:42
+     * @param orderId
+     * @return java.util.List<link.lycreate.bluefatty.utils.Servant>
+     */
+    public List<Servant> getServantByOrderId(int orderId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/2 2:42
+     * @param orderId
+     * @return java.util.List<link.lycreate.bluefatty.utils.Servant>
+     */
+    public List<Servant> getOneServantByOrderId(int orderId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/2 4:00
+     * @param orderId
+     * @return java.util.List<link.lycreate.bluefatty.utils.Demander>
+     */
+    public List<Demander>getDemServantByOrderId(int orderId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/2 11:12
+     * @param orderId
+     * @return java.util.List<link.lycreate.bluefatty.utils.Servant>
+     */
+    public List<Servant> getSerDemanderByOrderId(int orderId);
 }

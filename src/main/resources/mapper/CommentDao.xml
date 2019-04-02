@@ -110,4 +110,7 @@
       order_id = #{orderId,jdbcType=INTEGER}
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
+  <select id="selectCommentByOrderId" resultType="String">
+    select content from comment where order_id=#{orderId}
+  </select>
 </mapper>

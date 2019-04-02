@@ -18,4 +18,6 @@ public interface CommentDao {
     int updateByPrimaryKeyWithBLOBs(Comment record);
 
     int updateByPrimaryKey(Comment record);
+
+    String selectCommentByOrderId(int orderId);
 }

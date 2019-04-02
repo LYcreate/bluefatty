@@ -39,7 +39,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     order_id, create_time, servant_id, deadline, place_id, type_id, dmder_id, price,
-    comment_id, `status`
+    comment_id, status
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -49,7 +49,7 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from order
+    from orders
     where order_id = #{orderId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -375,7 +375,7 @@
     select servant_id from orders where order_id=#{serviceId}
   </select>
   <update id="updateServiceConfirm">
-    update orders set dmder_id=#{dmderId},status=#{status} where order_id=#{serviceId}
+    update orders set dmder_id=#{dmderId},status=#{status} where order_id=#{orderId}
   </update>
   <select id="selectRecordServiceOrder" resultType="link.lycreate.bluefatty.utils.ServiceResult">
     select a.order_id as 'serviceId',a.deadline as 'highDeadline',a.place_id as 'placeId',
@@ -393,9 +393,30 @@
         a.type_id as 'typeId',a.status as 'status',a.title as 'title',a.price as 'price',a.user_id as 'posterId',b.user_name as 'posterName',
         b.credit as 'posterStar',b.user_img as 'posterImg' from orders a left join user b on a.user_id=b.user_id where a.servant_id=#{servantId}
   </select>
+
+  <select id="selectRecordDmdOrder" resultType="link.lycreate.bluefatty.utils.DemandResult">
+     select a.order_id as 'dmdId',a.deadline as 'deadline',a.place_id as 'placeId',
+        a.type_id as 'typeId',a.status as 'status',a.title as 'title',a.price as 'price',a.user_id as 'dmderId',b.user_name as 'dmderName',
+        b.credit as 'dmderStar',b.user_img as 'dmderImg' from orders a left join user b on a.user_id=b.user_id left join records c
+        on a.order_id=c.order_id where c.recorder_id=#{dmdId} and c.status=0
+  </select>
+  <select id="selectDemandOrderByDmdId" resultType="link.lycreate.bluefatty.utils.DemandResult">
+    select a.order_id as 'dmdId',a.deadline as 'deadline',a.place_id as 'placeId',
+        a.type_id as 'typeId',a.status as 'status',a.title as 'title',a.price as 'price',a.user_id as 'dmderId',b.user_name as 'dmderName',
+        b.credit as 'dmderStar',b.user_img as 'dmderImg' from orders a left join user b on a.user_id=b.user_id where a.dmder_id=#{dmderId}
+  </select>
   <!--<select id="selectServiceOrderByServiceId" resultMap="orderResult">-->
     <!--select a.order_id,a.deadline,a.place_id,-->
         <!--a.type_id,a.title,a.price,a.user_id,b.user_name,-->
         <!--b.credit,b.user_img,a.status from orders a left join user b on a.user_id=b.user_id where a.servant_id=#{servantId}-->
   <!--</select>-->
+  <update id="updateServantFinish">
+    update orders set status=3 where order_id=#{serviceId} and servant_id=#{userId} and status=2
+  </update>
+  <update id="updateDemandConfirm">
+    update orders set servant_id=#{servantId},status=#{status} where order_id=#{dmdId}
+  </update>
+  <update id="updateDmderFinish">
+    update orders set status=4 where order_id=#{dmdId} and servant_id=#{userId} and (status=2||status=3)
+  </update>
 </mapper>

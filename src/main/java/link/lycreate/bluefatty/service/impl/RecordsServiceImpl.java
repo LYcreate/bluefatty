@@ -43,7 +43,7 @@ public class RecordsServiceImpl implements RecordsService {
 
     @Override
     public NetResult deleteRecord(int recorderId, int orderId) {
-        int status=orderDao.selectStatus(recorderId);
+        int status=orderDao.selectStatus(orderId);
         NetResult netResult;
         if (status==1||status==0){
             int count=recordsDao.deleteRecord(recorderId,orderId);
@@ -58,5 +58,11 @@ public class RecordsServiceImpl implements RecordsService {
             return netResult;
         }
 
+    }
+
+    @Override
+    public int deleteRecordByServiceId(int orderId) {
+        int count=recordsDao.deleteRecordByServiceId(orderId);
+        return count;
     }
 }

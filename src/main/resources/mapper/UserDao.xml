@@ -133,4 +133,28 @@
   <update id="updateStuCardB" >
     update user set stu_img_2=#{finalPath} where user_id=#{userId}
   </update>
+  <select id="selectDemanderByOrderId" resultType="link.lycreate.bluefatty.utils.Demander">
+    select a.user_id as dmderId,a.user_name as dmderName,a.user_img as dmderImg from user a left join records b
+    on a.user_id=b.recorder_id where b.order_id=#{orderId} and b.status=0
+  </select>
+  <select id="selectOneDemanderByOrderId" resultType="link.lycreate.bluefatty.utils.Demander">
+     select a.user_id as dmderId,a.user_name as dmderName,a.user_img as dmderImg from user a left join orders b
+     on a.user_id=b.dmder_id where b.order_id=#{orderId} and b.status &gt;= 2
+  </select>
+  <select id="selectServantByOrderId" resultType="link.lycreate.bluefatty.utils.Servant">
+     select a.user_id as servantId,a.user_name as servantName,a.user_img as servantImg from user a left join records b
+    on a.user_id=b.recorder_id where b.order_id=#{orderId} and b.status=1
+  </select>
+  <select id="selectOneServantByOrderId" resultType="link.lycreate.bluefatty.utils.Servant">
+    select a.user_id as servantId,a.user_name as servantName,a.user_img as servantImg from user a left join orders b
+     on a.user_id=b.servant_id where b.order_id=#{orderId} and b.status &gt;= 2
+  </select>
+  <select id="selectDemServantByOrderId" resultType="link.lycreate.bluefatty.utils.Demander">
+    select a.user_id as dmderId,a.user_name as dmderName,a.user_img as dmderImg from user a left join records b
+    on a.user_id=b.recorder_id where b.order_id=#{orderId} and b.status=1
+  </select>
+  <select id="selectSerDemanderByOrderId" resultType="link.lycreate.bluefatty.utils.Servant">
+    select a.user_id as servantId,a.user_name as servantName,a.user_img as servantImg from user a left join records b
+    on a.user_id=b.recorder_id where b.order_id=#{orderId} and b.status=1
+  </select>
 </mapper>

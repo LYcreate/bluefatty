@@ -44,7 +44,23 @@ public interface RecordsDao {
     status
      * @return int
      */
-    int updateRecords(@Param("orderId")int orderId,@Param("recorderId")int recorderId, int status);
-
+    int updateRecords(@Param("orderId")int orderId,@Param("recorderId")int recorderId, @Param("status") int status);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/2 3:23
+     * @param orderId
+     * @return int
+     */
+    int deleteRecordByServiceId(int orderId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/2 11:36
+     * @param servantId
+    dmdId
+     * @return link.lycreate.bluefatty.model.Records
+     */
+    Records selectRecordByServantAndDmdId(@Param("servantId") int servantId,@Param("dmdId") int dmdId);
 
 }

@@ -185,4 +185,40 @@ public class UserServiceImpl implements UserService {
         logger.info("返回值：{}" + netResult.toString());
         return netResult;
     }
+
+    @Override
+    public List<Demander> getDmderByOrderId(int orderId) {
+        List<Demander> dmdList=userDao.selectDemanderByOrderId(orderId);
+        return dmdList;
+    }
+
+    @Override
+    public List<Demander> getOneDmderByOrderId(int orderId) {
+        List<Demander> dmdList=userDao.selectOneDemanderByOrderId(orderId);
+        return dmdList;
+    }
+
+    @Override
+    public List<Servant> getServantByOrderId(int orderId) {
+        List<Servant> servantList=userDao.selectServantByOrderId(orderId);
+        return servantList;
+    }
+
+    @Override
+    public List<Servant> getOneServantByOrderId(int orderId) {
+        List<Servant> servantList=userDao.selectOneServantByOrderId(orderId);
+        return servantList;
+    }
+
+    @Override
+    public List<Demander> getDemServantByOrderId(int orderId) {
+        List<Demander> dmdList=userDao.selectDemServantByOrderId(orderId);
+        return dmdList;
+    }
+
+    @Override
+    public List<Servant> getSerDemanderByOrderId(int orderId) {
+        List<Servant> servantList=userDao.selectSerDemanderByOrderId(orderId);
+        return servantList;
+    }
 }

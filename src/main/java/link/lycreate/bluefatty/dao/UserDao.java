@@ -1,11 +1,14 @@
 package link.lycreate.bluefatty.dao;
 
 import link.lycreate.bluefatty.model.User;
+import link.lycreate.bluefatty.utils.Demander;
+import link.lycreate.bluefatty.utils.Servant;
 import link.lycreate.bluefatty.utils.StuInfo;
 import link.lycreate.bluefatty.utils.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -163,4 +166,28 @@ public interface UserDao {
      * @return int
      */
     int selectUniversityId(int userId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/1 23:40
+     * @param orderId
+     * @return java.util.List<link.lycreate.bluefatty.utils.Demander>
+     */
+    List<Demander> selectDemanderByOrderId(int orderId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/2 2:06
+     * @param orderId
+     * @return java.util.List<link.lycreate.bluefatty.utils.Demander>
+     */
+    List<Demander> selectOneDemanderByOrderId(int orderId);
+
+    List<Servant> selectServantByOrderId(int orderId);
+
+    List<Servant> selectOneServantByOrderId(int orderId);
+
+    List<Demander>selectDemServantByOrderId(int orderId);
+
+    List<Servant> selectSerDemanderByOrderId(int orderId);
 }

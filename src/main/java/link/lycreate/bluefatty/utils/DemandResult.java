@@ -23,7 +23,7 @@ public class DemandResult {
     private String dmderImg;
     private Integer status;
 
-    public DemandResult(Integer dmdId, Timestamp createTime, Timestamp deadline, Integer placeId, Integer typeId, String title,  Integer price, Integer dmderId, String dmderName, Integer dmderStar, String dmderImg) {
+    public DemandResult(Integer dmdId, Timestamp createTime, Timestamp deadline, Integer placeId, Integer typeId, String title, Integer price, Integer dmderId, String dmderName, Integer dmderStar, String dmderImg) {
         this.dmdId = dmdId;
         this.createTime = createTime;
         this.deadline = deadline;
@@ -148,6 +148,14 @@ public class DemandResult {
         this.dmderImg = dmderImg;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "DemandResult{" +
@@ -163,6 +171,7 @@ public class DemandResult {
                 ", dmderName='" + dmderName + '\'' +
                 ", dmderStar=" + dmderStar +
                 ", dmderImg='" + dmderImg + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

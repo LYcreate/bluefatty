@@ -1,6 +1,8 @@
 package link.lycreate.bluefatty.controller;
 
+import link.lycreate.bluefatty.service.CommentService;
 import link.lycreate.bluefatty.service.OrderService;
+import link.lycreate.bluefatty.service.RecordsService;
 import link.lycreate.bluefatty.service.UserService;
 import link.lycreate.bluefatty.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,10 @@ public class  OrderController {
     OrderService orderService;
     @Autowired
     UserService userService;
-
+    @Autowired
+    CommentService commentService;
+    @Autowired
+    RecordsService recordsService;
     @RequestMapping("/getAllDemands")
     public @ResponseBody
     Map<String,Object> getAllDemands(HttpServletRequest request){
@@ -192,7 +197,71 @@ public class  OrderController {
         System.out.println(netResult.toString());
         return netResult;
     }
+    @RequestMapping("/getDmdOrder")
+    public @ResponseBody Map<String,Object> getDmdOrder(HttpServletRequest request){
+        String token=request.getHeader("token");
+        int dmderId=userService.getUserIdByToken(token);
+        List<DemandResult> dmdResultList=orderService.getDmdOrder(dmderId);
+        System.out.println(dmdResultList);
+        Map<String,Object> resultMap=new HashMap<>();
+        resultMap.put("dmdOrderArray",dmdResultList);
+        return resultMap;
+    }
+    @RequestMapping("/getDemandDetail")
+    public @ResponseBody Map<String,Object> getDemandDetail(HttpServletRequest request){
+        String token=request.getHeader("token");
+        int userId=userService.getUserIdByToken(token);
+        String strDmdId=request.getParameter("dmdId");
+        int dmdId=Integer.parseInt(strDmdId);
+        Map<String,Object> resultMap=new HashMap<>();
+        String content=orderService.getDmdByDmdId(dmdId);
+        String comment=commentService.getComment(dmdId);
+        int status=orderService.getStatusByOrderId(dmdId);
+        List<Servant> servantList;
+        if (status==0) {
+            servantList = userService.getSerDemanderByOrderId(dmdId);
+            resultMap.put("servant",servantList);
+        }else if(status==1){
+            servantList=userService.getServantByOrderId(dmdId);
+            resultMap.put("servant",servantList);
+        }else {
+            servantList= userService.getOneServantByOrderId(dmdId);
+            resultMap.put("servant",servantList);
+        }
+        resultMap.put("content",content);
+        resultMap.put("comment",comment);
+        resultMap.put("servant",servantList);
+        return resultMap;
+    }
 
+    @RequestMapping("/confirmDemand")
+    public @ResponseBody NetResult confirmDemand(HttpServletRequest request){
+        String token=request.getHeader("token");
+        System.out.println("token"+token);
+        Integer dmderId=userService.getUserIdByToken(token);
+        if (dmderId==null){
+            return new NetResult(0,"会话错误！");
+        }
+        String strServantId=request.getParameter("servantId");
+        Integer servantId=Integer.parseInt(strServantId);
+        String strDmdId=request.getParameter("dmdId");
+        Integer dmdId=Integer.parseInt(strDmdId);
+        System.out.println("dmdId"+dmdId);
+        NetResult netResult=orderService.confirmDemand(dmderId,servantId,dmdId);
+        return netResult;
+    }
+    @RequestMapping("/FinishDemand")
+    public @ResponseBody NetResult finishDemand(HttpServletRequest request){
+        String token=request.getHeader("token");
+        Integer userId=userService.getUserIdByToken(token);
+        if (userId==null){
+            return new NetResult(0,"会话错误！");
+        }
+        String strDmdId=request.getParameter("dmdId");
+        int dmdId=Integer.parseInt(strDmdId);
+        NetResult netResult=orderService.finishDemand(userId,dmdId);
+        return netResult;
+    }
     @RequestMapping("/getAllServices")
     public @ResponseBody Map<String,Object> getAllServices(HttpServletRequest request){
         //pageNow
@@ -233,6 +302,32 @@ public class  OrderController {
         resultMap.put("serviceArray",serviceArray);
         return resultMap;
     }
+    @RequestMapping("/getServiceDetail")
+    public @ResponseBody Map<String,Object> getServiceDetail(HttpServletRequest request){
+        String token=request.getHeader("token");
+        int userId=userService.getUserIdByToken(token);
+        String strServiceId=request.getParameter("serviceId");
+        int serviceId=Integer.parseInt(strServiceId);
+        Map<String,Object> resultMap=new HashMap<>();
+        String content=orderService.getServiceByServiceId(serviceId);
+        String comment=commentService.getComment(serviceId);
+        int status=orderService.getStatusByOrderId(serviceId);
+        List<Demander> dmderList;
+        if (status==1) {
+            dmderList = userService.getDemServantByOrderId(serviceId);
+            resultMap.put("dmder",dmderList);
+        }else if(status==0){
+            dmderList=userService.getDmderByOrderId(serviceId);
+            resultMap.put("dmder",dmderList);
+        }else {
+            dmderList= userService.getOneDmderByOrderId(serviceId);
+            resultMap.put("dmder",dmderList);
+        }
+        resultMap.put("content",content);
+        resultMap.put("comment",comment);
+
+        return resultMap;
+    }
     @RequestMapping("/deleteService")
     public @ResponseBody NetResult deleteService(HttpServletRequest request){
         String token=request.getHeader("token");
@@ -242,6 +337,7 @@ public class  OrderController {
         }
         String strServiceId=request.getParameter("serviceId");
         int serviceId=Integer.parseInt(strServiceId);
+        int recordNetResult=recordsService.deleteRecordByServiceId(servantId);
         NetResult netResult=orderService.deleteService(servantId,serviceId);
         return netResult;
     }
@@ -360,9 +456,10 @@ public class  OrderController {
         }
         String strDmderId=request.getParameter("dmderId");
         Integer dmderId=Integer.parseInt(strDmderId);
-        String strServiceId=request.getParameter("serviceid");
+        String strServiceId=request.getParameter("serviceId");
         Integer serviceId=Integer.parseInt(strServiceId);
-        NetResult netResult=orderService.confirmService(servantId,dmderId,servantId);
+        System.out.println("serviceId"+servantId);
+        NetResult netResult=orderService.confirmService(servantId,dmderId,serviceId);
         return netResult;
     }
     @RequestMapping("/getServiceOrder")
@@ -370,9 +467,19 @@ public class  OrderController {
         String token=request.getHeader("token");
         int servantId=userService.getUserIdByToken(token);
         List<ServiceResult> serviceResultList=orderService.getServiceOrder(servantId);
+        System.out.println(serviceResultList);
         Map<String,Object> resultMap=new HashMap<>();
         resultMap.put("serviceOrderArray",serviceResultList);
         return resultMap;
     }
 
+    @RequestMapping("/FinishService")
+    public @ResponseBody NetResult finishService(HttpServletRequest request){
+        String token=request.getHeader("token");
+        int userId=userService.getUserIdByToken(token);
+        String strServiceId=request.getParameter("serviceId");
+        int serviceId=Integer.parseInt(strServiceId);
+        NetResult netResult=orderService.finishService(userId,serviceId);
+        return netResult;
+    }
 }

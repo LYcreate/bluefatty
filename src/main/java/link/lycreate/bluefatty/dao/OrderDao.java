@@ -292,7 +292,7 @@ public interface OrderDao {
     status
      * @return int
      */
-    int updateServiceConfirm(int dmderId,int orderId,int status);
+    int updateServiceConfirm(@Param("dmderId") int dmderId,@Param("orderId") int orderId,@Param("status") int status);
     /**
      * description
      * @author LYcreate
@@ -309,4 +309,49 @@ public interface OrderDao {
      * @return java.util.List<link.lycreate.bluefatty.utils.ServiceResult>
      */
     List<ServiceResult> selectServiceOrderByServiceId(int servantId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/1 19:45
+     * @param dmderId
+     * @return java.util.List<link.lycreate.bluefatty.utils.DemandResult>
+     */
+    List<DemandResult> selectRecordDmdOrder(int dmderId);
+
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/1 19:44
+     * @param dmderId
+     * @return java.util.List<link.lycreate.bluefatty.utils.DemandResult>
+     */
+    List<DemandResult> selectDemandOrderByDmdId(int dmderId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/2 10:45
+     * @param userId
+    serviceId
+     * @return int
+     */
+    int updateServantFinish(@Param("userId") int userId,@Param("serviceId") int serviceId);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/2 11:41
+     * @param servantId
+    dmdId
+    status
+     * @return int
+     */
+    int updateDemandConfirm(@Param("servantId") int servantId,@Param("dmdId")int dmdId,@Param("status") int status);
+    /**
+     * description
+     * @author LYcreate
+     * @date 2019/4/2 12:30
+     * @param userId
+    dmdId
+     * @return int
+     */
+    int updateDmderFinish(@Param("userId")int userId, @Param("dmdId")int dmdId);
 }

@@ -225,5 +225,48 @@ public interface OrderService {
     * @return java.util.Map<java.lang.String,java.lang.Object>
     */
    List<ServiceResult> getServiceOrder(int servantId);
-
+   /**
+    * description
+    * @author LYcreate
+    * @date 2019/4/1 19:40
+    * @param dmderId
+    * @return java.util.List<link.lycreate.bluefatty.utils.DemandResult>
+    */
+   List<DemandResult> getDmdOrder(int dmderId);
+   /**
+    * description
+    * @author LYcreate
+    * @date 2019/4/2 1:58
+    * @param orderId
+    * @return int
+    */
+   int getStatusByOrderId(int orderId);
+   /**
+    * description
+    * @author LYcreate
+    * @date 2019/4/2 10:33
+    * @param userId
+   serviceId
+    * @return link.lycreate.bluefatty.utils.NetResult
+    */
+   NetResult finishService(int userId,int serviceId);
+   /**
+    * description
+    * @author LYcreate
+    * @date 2019/4/2 11:28
+    * @param dmderId
+   servantId
+   dmdId
+    * @return link.lycreate.bluefatty.utils.NetResult
+    */
+   NetResult confirmDemand(int dmderId,int servantId,int dmdId);
+   /**
+    * description
+    * @author LYcreate
+    * @date 2019/4/2 12:28
+    * @param userId
+   dmdId
+    * @return link.lycreate.bluefatty.utils.NetResult
+    */
+   NetResult finishDemand(int userId,int dmdId);
 }
